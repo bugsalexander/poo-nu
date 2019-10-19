@@ -39,6 +39,7 @@ function findNearest(database, latitude, longitude, count) {
   + ";", 
     function (err, result, fields) {
     if (err) throw err;
+    console.log(result);
     return result;
   });
 }
