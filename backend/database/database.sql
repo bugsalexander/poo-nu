@@ -103,16 +103,16 @@ INSERT INTO Building VALUES
 
 DROP TABLE IF EXISTS Bathroom;
 CREATE TABLE Bathroom (
-	bathroom_id int(11) PRIMARY KEY,
+	bathroom_id int(11) PRIMARY KEY AUTO_INCREMENT,
     building_id int(11),
     bathroom_name varchar(100) NOT NULL,
     bathroom_description varchar(255) NOT NULL,
-    floor int(11) NOT NULL,
-    male tinyint(1) NOT NULL,
-    female tinyint(1) NOT NULL,
-    all_gender tinyint(1) NOT NULL,
-    handicap_accessible tinyint(1) NOT NULL,
-    capacity int(11) NOT NULL,
+    bathroom_floor int(11) NOT NULL,
+    bathroom_male tinyint(1) NOT NULL,
+    bathroom_female tinyint(1) NOT NULL,
+    bathroom_all_gender tinyint(1) NOT NULL,
+    bathroom_handicap_accessible tinyint(1) NOT NULL,
+    bathroom_capacity int(11) NOT NULL,
     CONSTRAINT fk_bathroom_building FOREIGN KEY (building_id) REFERENCES Building (building_id)
 );
 
@@ -142,25 +142,95 @@ CREATE TABLE In_Use (
 );
 
 
+-------------------------------------------- PROCEDURES --------------------------------------------------------
+-- ADD BATHROOM
+DROP PROCEDURE IF EXISTS add_bathroom
+DELIMITER //
+CREATE PROCEDURE add_bathroom
+(
+    building_id int(11),
+    name varchar(100),
+    description varchar(255),
+    floor int(11),
+    male tinyint(1),
+    female tinyint(1),
+    all_gender tinyint(1),
+    handicap_accessible tinyint(1),
+    capacity int(11)
+)
+begin
+
+    -- check if building exists
+    if building_id not in (select b.building_id from Building b) then
+        signal sqlstate 'HY000' set message_text = 'Building not found!';
+
+    -- insert into Bathroom table
+    else
+        INSERT INTO Bathroom VALUES
+            (   building_id,
+                name,
+                description,
+                floor,
+                male,
+                female,
+                all_gender,
+                handicap_accessible,
+                capacity);
+    end if;
+
+end //
+
+
+DELIMITER ;
+
+
+
+
+-- FIND CLOSEST BUILDINGS (lat, long, count)
+select *,
+ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
+from Building
+order by ft asc
+limit 20; -- count
 
 -- FIND CLOSEST BATHROOMS (lat, long, count)
-select *, SQRT(POWER((building_latitude - 42.338361), 2) + POWER((building_longitude - -71.090031), 2)) as distance 	-- latitude, longitude
-from Building join Bathroom using (building_id)
-order by distance asc
-limit 10; 	-- count
-
--- FIND BATHROOMS WITHIN (lat, long, distance)
-select building_name, bathroom_name, bathroom_description, floor, male, female, all_gender, handicap_accessible, capacity,
-ROUND(((SQRT(POWER((building_latitude - 42.340133), 2) + POWER((building_longitude - -71.088299), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
+select building_name, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
+ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
 from Building join Bathroom using (building_id)
 order by ft asc
-limit 2;
+limit 5; -- count
 
 
 -- FIND BUILDINGS WITHIN (lat, long, distance)
+select *,
+ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
+from Building
+having ft < 200 -- distance
+order by ft asc;
 
+-- FIND BATHROOMS WITHIN (lat, long, distance)
+select *,
+ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
+from Building join Bathroom using (building_id)
+having ft < 1200 -- distance
+order by ft asc;
 
 -- FIND BATHROOMS IN BUILDING (building_id)
+select *
+from Building join Bathroom using (building_id)
+where building_id = 1; -- building_id
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
