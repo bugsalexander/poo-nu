@@ -10,7 +10,7 @@ import { connect } from "mysql";
 /**
  * Produces the nearest buildings.
  */
-function nearestxbuildings(database, longitude, latitude, count) {
+export function nearestxbuildings(database, longitude, latitude, count) {
   return database.connect(function(err) {
     if (err) {
       console.log(err);
