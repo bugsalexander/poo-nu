@@ -11,5 +11,8 @@
     "Jacob Chvatal <chvatal.j@husky.neu.edu>"
   ],
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "graphql": "^14.5.8"
+  }
 }

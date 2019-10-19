@@ -1,2 +1,5 @@
 # ignore vscode workspaces
 *.code-workspace
+
+# ignore node modules
+node_modules/**/*
