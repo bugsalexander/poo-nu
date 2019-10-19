@@ -1,17 +1,23 @@
-import { graphql } from "graphql";
+/**
+ * This file is part of Poo-NU.
+ * This file contains resolvers for the GraphQL portion of Apollo server.
+ */
+ 
+import { nearestxbuildings } from "./sql-connect";
 
-export const resolvers = {
-  Query: {
-    getBathrooms: () => nearestxbathrooms(10),
-    getBuildings: () => nearestxbuildings(1)
+export function gql_resolver(database) {
+  return {
+    Query: {
+      getBathrooms: () => nearestxbathrooms(),
+      getBuildings: () => nearestxbuildings(database, 91, 91, 10)
+    }
   }
 }
 
 /**
  * test function to produce bathrooms
- * @param {*} numBathrooms 
  */
-function nearestxbathrooms(numBathrooms) {
+function nearestxbathrooms() {
   return [
     {
       "name": "poo bathroom 1",
@@ -25,14 +31,5 @@ function nearestxbathrooms(numBathrooms) {
       "name": "dillons bathroom 8)",
       "male": true
     }
-  ];
-}
-
-/**
- * 
- */
-function nearestxbuildings(numBuildings) {
-  return [
-
   ];
 }
