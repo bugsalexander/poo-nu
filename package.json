@@ -1,0 +1,15 @@
+{
+  "name": "poo-nu",
+  "version": "1.0.0",
+  "description": "Finds the nearest bathroom near you!",
+  "main": "index.js",
+  "repository": "https://github.com/bugsalexander/poo-nu.git",
+  "contributors": [
+    "Alex Takayama <alex@takayamasan.com>",
+    "Dillon Hammer <dillonhammer@gmail.com>",
+    "Stanley Liu <liu.sta@husky.neu.edu>",
+    "Jacob Chvatal <chvatal.j@husky.neu.edu>"
+  ],
+  "license": "MIT",
+  "private": true
+}
