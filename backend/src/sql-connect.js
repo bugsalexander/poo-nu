@@ -32,7 +32,7 @@ function findNearest(database, latitude, longitude, count) {
   return database.query(""
   + "SELECT *, ROUND(((SQRT(POWER((building_latitude - " 
   + latitude 
-  + "), 2) POWER((building_longitude - " 
+  + "), 2) + POWER((building_longitude - " 
   + longitude 
   + "), 2)) * 10000 / 90) * 3280.4), 0) as ft FROM Building order by ft asc limit " 
   + count 
