@@ -58,7 +58,7 @@ const Bathroom = gql`
     """
     bathroom_id: Int!
     building_id: Int!
-    name: String!
+    building_name: String!
     description: String!
     floor: Int!
     male: Boolean!
