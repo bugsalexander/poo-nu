@@ -10,19 +10,13 @@ import { readFileSync } from 'fs';
  
 // tries to connect to the database
 const login = JSON.parse(readFileSync("./database/mysql_login.txt"));
-const database = createConnection({
-  "host" : "localhost",
-  "user" : "root",
-  "password" : "poonu",
-  "database" : "poonu"
-});
+const database = createConnection(login);
 
 // runs the apollo server
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
-const resolvers = gql_resolver(database);
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, gql_resolver(database) });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {

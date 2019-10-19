@@ -9,8 +9,12 @@ import { connect } from "mysql";
 
 /**
  * Produces the nearest buildings.
+ * @param {Connection} database
+ * @param {number} latitude the latitude
+ * @param {number} longitude the longitude
+ * @param {number} count the number of buildings to produce
  */
-export function nearestxbuildings(database, longitude, latitude, count) {
+export function nearestxbuildings(database, latitude, longitude, count) {
   return database.connect(function(err) {
     if (err) {
       console.log(err);
@@ -23,8 +27,8 @@ export function nearestxbuildings(database, longitude, latitude, count) {
 
 /**
  * @param {*} database the database
- * @param {number} longitude 
  * @param {number} latitude 
+ * @param {number} longitude 
  * @param {number} count 
  */
 function findNearest(database, latitude, longitude, count) {
