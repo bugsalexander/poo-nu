@@ -9,7 +9,7 @@ export function gql_resolver(database) {
   return {
     Query: {
       getBathrooms: () => nearestxbathrooms(),
-      getBuildings: () => nearestxbuildings(database, 91, 91, 10)
+      getBuildings: () => nearestxbuildings(database, 41.339475, -71.087224, 20)
     }
   }
 }
