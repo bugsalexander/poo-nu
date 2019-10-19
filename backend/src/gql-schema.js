@@ -3,21 +3,41 @@
  * Contains the Schema for request formats.
  */
 
-import { buildSchema } from "graphql";
+import { gql } from 'apollo-server';
 
-
- 
  /**
   * The Request format for GraphQL. Must exist.
   * @param getBathrooms list of bathrooms
   * @param getBuildings list of buildings
   */
-export const Request = buildSchema(`
+const Request = gql`
   type Query {
     getBathrooms: [Bathroom!]!
     getBuildings: [Building!]!
   }
-`);
+`;
+
+/**
+ * Mutation to add a bathroom.
+ * Users can add bathrooms, but not buildings.
+ */
+const Mutation = gql`
+  type Mutation {
+    """
+    adds a bathroom.
+    """
+    addBathroom(
+      building: Int, 
+      name: String, 
+      description: String, 
+      floor: Int, 
+      male: Boolean, 
+      female: Boolean, 
+      all_gender: Boolean, 
+      handicap_accessible: Boolean
+    ): Bathroom
+  }
+`;
 
 /**
  * A Bathroom is a bathroom.
@@ -31,8 +51,11 @@ export const Request = buildSchema(`
  * @param all_gender is this bathroom allgender?
  * @param handicap_accessible is this bathroom handicap accessible?
  */
-export const Bathroom = buildSchema(`
+const Bathroom = gql`
   type Bathroom {
+    """
+    A bathroom.
+    """
     bathroom_id: Int!
     building_id: Int!
     name: String!
@@ -43,7 +66,7 @@ export const Bathroom = buildSchema(`
     all_gender: Boolean!
     handicap_accessible: Boolean!
   }
-`);
+`;
 
 /**
  * A Building is a building, with bathroom.
@@ -52,11 +75,22 @@ export const Bathroom = buildSchema(`
  * @param longitude the longitude
  * @param latitude the latitude
  */
-export const Building = buildSchema(`
+const Building = gql`
   type Building {
+    """
+    A building.
+    """
     id: Int!
     name: String!
     longitude: Float!
     latitude: Float!
   }
-`);
+`;
+
+// export the type definitions 
+export const typeDefs = [
+  Request,
+  Mutation,
+  Bathroom,
+  Building
+];
