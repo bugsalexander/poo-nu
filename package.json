@@ -2,7 +2,7 @@
   "name": "poo-nu",
   "version": "1.0.0",
   "description": "Finds the nearest bathroom near you!",
-  "main": "index.js",
+  "main": "backend/src/index.js",
   "repository": "https://github.com/bugsalexander/poo-nu.git",
   "contributors": [
     "Alex Takayama <alex@takayamasan.com>",
@@ -12,7 +12,5 @@
   ],
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "graphql": "^14.5.8"
-  }
+  "workspaces": ["backend", "frontend"]
 }
