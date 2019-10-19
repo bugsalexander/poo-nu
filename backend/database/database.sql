@@ -116,6 +116,11 @@ CREATE TABLE Bathroom (
     CONSTRAINT fk_bathroom_building FOREIGN KEY (building_id) REFERENCES Building (building_id)
 );
 
+INSERT INTO Bathroom VALUES
+(1, 1, "b1", "b1 desc", 2, 1, 0, 0, 0, 4),
+(2, 2, "b2", "b2 desc", 3, 0, 1, 0, 0, 6),
+(3, 3, "b3", "b3 desc", 1, 1, 1, 1, 0, 7);
+
 -------------------------------------------- RATING
 
 DROP TABLE IF EXISTS Rating;
@@ -138,15 +143,27 @@ CREATE TABLE In_Use (
 
 
 
--- FIND CLOSEST 10 BATHROOMS
-select *, SQRT(POWER((building_latitude - 42.338361), 2) + POWER((building_longitude - -71.090031), 2)) as distance
-from Building
+-- FIND CLOSEST BATHROOMS (lat, long, count)
+select *, SQRT(POWER((building_latitude - 42.338361), 2) + POWER((building_longitude - -71.090031), 2)) as distance 	-- latitude, longitude
+from Building join Bathroom using (building_id)
 order by distance asc
-limit 10;
+limit 10; 	-- count
 
--- FIND ALL BUILDINGS
-select *
-from Building;
+-- FIND BATHROOMS WITHIN (lat, long, distance)
+select building_name, bathroom_name, bathroom_description, floor, male, female, all_gender, handicap_accessible, capacity,
+ROUND(((SQRT(POWER((building_latitude - 42.340133), 2) + POWER((building_longitude - -71.088299), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
+from Building join Bathroom using (building_id)
+order by ft asc
+limit 2;
+
+
+-- FIND BUILDINGS WITHIN (lat, long, distance)
+
+
+-- FIND BATHROOMS IN BUILDING (building_id)
+
+
+
 
 
 
