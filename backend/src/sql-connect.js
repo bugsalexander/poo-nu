@@ -34,7 +34,7 @@ function findNearest(database, latitude, longitude, count) {
   + latitude 
   + "), 2) POWER((building_longitude - " 
   + longitude 
-  + "), 2)) * 10000 / 90) * 3280.4), 0) as ft FROM Building join Bathroom using (building_id) order by ft asc limit " 
+  + "), 2)) * 10000 / 90) * 3280.4), 0) as ft FROM Building order by ft asc limit " 
   + count 
   + ";", 
     function (err, result, fields) {
