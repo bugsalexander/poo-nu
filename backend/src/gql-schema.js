@@ -58,7 +58,7 @@ const Bathroom = gql`
     """
     bathroom_id: Int!
     building_id: Int!
-    building_name: String!
+    name: String!
     description: String!
     floor: Int!
     male: Boolean!
@@ -80,10 +80,10 @@ const Building = gql`
     """
     A building.
     """
-    id: Int!
-    name: String!
-    longitude: Float!
-    latitude: Float!
+    building_id: Int!
+    building_name: String!
+    building_longitude: Float!
+    building_latitude: Float!
   }
 `;
 
