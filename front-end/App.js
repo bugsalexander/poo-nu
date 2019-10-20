@@ -27,14 +27,17 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { AppRegistry} from 'react-native';
 import Routes from './Routes';
+import InnerMap from './src/components/InnerMap';
 import AddBathroom from './src/components/AddBathroom';
 
 function App() {
   return (
-    <AddBathroom />
+  //  <Routes /> 
+  //  <InnerMap/>
+  <AddBathroom></AddBathroom>
   );
 } 
 
 
 export default App
-AppRegistry.registerComponent('App', () => App)
+//AppRegistry.registerComponent('App', () => App)

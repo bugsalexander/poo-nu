@@ -9,9 +9,8 @@ export default class BathroomPanel extends Component {
         title: 'Pick a Bathroom'
     };
 
-
     // TODO: produce bathroom images dependent on type of bathroom
-    // produces a bathroom image depending on the type of bathroom.
+    // produces a bathroom image depending on the type of bathroom to be displayed.
     determineBathroomType(b) {
 
     }
@@ -19,7 +18,7 @@ export default class BathroomPanel extends Component {
     render() {
         return (
         <View style = {{alignItems: 'center', width: '100%'}} >
-            <Text onPress ={() => {Actions.info({bathroomName: this.props.bathroomName})}} style = {styles.titleText}> {this.props.bathroomName}</Text>
+            <Text onPress ={() => {Actions.info({lastPos: this.props.lastPos, bathroomName: this.props.bathroomName})}} style = {styles.titleText}> {this.props.bathroomName}</Text>
             <Text>{this.props.bathroomAddress}</Text>
             <View style={styles.line} />
         </View>

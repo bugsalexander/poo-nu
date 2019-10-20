@@ -16,7 +16,9 @@ export default class BathroomScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // bathroom: props.bathroom,
       titleText: props.bathroomName,
+      lastPos: props.lastPos,// this is the position of the current person
       numReviews: 51,
       count: 0,
       isReviewVisible: false,
@@ -33,8 +35,6 @@ export default class BathroomScreen extends Component {
     });
   };
 
-  onBackPress = () => {};
-
   submit(rating) {
     console.log(rating);
     this.setState({
@@ -43,6 +43,19 @@ export default class BathroomScreen extends Component {
       userRating: rating,
       hasReviewed: true
     });
+
+    // make submit rating request
+  }
+
+
+  publishRatingQuery = () => {
+    return `
+      mutation {
+        addRating(bathroomId: ${this.state.bathroomId}, ratingContent: ${this.state.ratingContent}, ratingValue: ${this.state.userRating}) {
+            
+        }
+      }
+    `
   }
 
   render() {

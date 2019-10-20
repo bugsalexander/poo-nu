@@ -12,7 +12,7 @@ const Routes = () => (
     titleStyle={{ width: "100%" }}
   >
     <Scene key="root">
-      <Scene key="home" component={BathroomPage} title="Home" initial={true} rightTitle="poop"/>
+      <Scene key="home" component={BathroomPage} title="Home" initial={true}/>
       <Scene key="info" component={BathroomScreen} title="Bathroom Info" />
       <Scene key="add" component={AddBathroom} title="New Bathroom" />
     </Scene>

@@ -7,41 +7,47 @@ import {
   Alert,
 } from 'react-native';
 import Constants from 'expo-constants';
+import { Actions } from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
 
 export default class GoButton extends Component {
-  state = {
-    initialPosition: 'unknown',
-    lastPosition: 'unknown',
+
+  getNearestBathroom = () => {
+    return `
+      query {
+        getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:1) {
+            bathroom_id
+            building_id
+            name
+            building_name
+            description
+            floor
+            male
+            female
+            all_gender
+            handicap_accessible
+        }
+      }
+    `
   }
 
-  watchID = null;
-   componentDidMount = () => {
-      navigator.geolocation.getCurrentPosition(
-         (position) => {
-            const initialPosition = JSON.stringify(position);
-            this.setState({ initialPosition });
-         },
-         (error) => alert(error.message),
-         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-      );
-      this.watchID = navigator.geolocation.watchPosition((position) => {
-         const lastPosition = JSON.stringify(position);
-         this.setState({ lastPosition });
-      });
-   }
-   componentWillUnmount = () => {
-      navigator.geolocation.clearWatch(this.watchID);
-   }
- 
+  goToNearestBathroom() {
+    const query = this.getNearestBathrooms(20);
+    this.setState({
+      query
+    });
 
+    // TODO: redo this thing with the proper information from the query
+    Actions.info({bathroom: this.state.bathroom});
+  }
+ 
   render() {
     return (
         <SafeAreaView style={styles.container}>
           <View>
             <Button
               title="I gotta go."
-              onPress={() => Alert.alert('pranked')}
+              onPress={() => this.goToNearestBathroom()}
             />
             <Text style = {styles.boldText}>
                Initial position: {this.state.initialPosition} Current: {this.state.lastPosition}
