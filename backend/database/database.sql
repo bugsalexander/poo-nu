@@ -285,8 +285,6 @@ call add_rating(6, 'Fantastic Poop', 6);
 select * from Rating;
 
 
-
-
 -- GET ALL BUILDINGS () RETURNS (building_name)
 select building_name from Building;
 call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
