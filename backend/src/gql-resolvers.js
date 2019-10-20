@@ -50,6 +50,12 @@ function getNearestBathrooms(database, latitude, longitude, count) {
 }
 
 function getNearestBuildings(database, latitude, longitude, count) {
+  console.log("latitude: " + latitude);
+  console.log(latitude);
+  console.log("longitude: " + longitude);
+  console.log(longitude);
+  console.log("count: " + count);
+  console.log(count);
 
   const query = ""
   + "select *, ROUND(((SQRT(POWER((building_latitude - "
