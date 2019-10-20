@@ -16,8 +16,6 @@ export default class BathroomPage extends Component {
         );
     }
 }
-//             
-
 
 const styles = StyleSheet.create ({
     item: {

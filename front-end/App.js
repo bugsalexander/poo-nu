@@ -25,6 +25,8 @@ const list = [
 import BathroomScreen from "./BathroomScreen.js";
 import RatingModal from "./RatingModal.js";
 
+
+
 export default function App() {
   return (
     <View style={styles.container}>
@@ -39,6 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
 });
