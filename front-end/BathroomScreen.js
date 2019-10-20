@@ -43,6 +43,19 @@ export default class BathroomScreen extends Component {
       userRating: rating,
       hasReviewed: true
     });
+
+    // make submit rating request
+  }
+
+
+  publishRatingQuery = () => {
+    return `
+      mutation {
+        addRating(bathroomId: ${this.state.bathroomId}, ratingContent: ${this.state.ratingContent}, ratingValue: ${this.state.userRating}) {
+            
+        }
+      }
+    `
   }
 
   render() {
