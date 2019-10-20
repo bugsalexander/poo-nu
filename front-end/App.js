@@ -30,7 +30,7 @@ import RatingModal from "./RatingModal.js";
 export default function App() {
   return (
     <View style={styles.container}>
-      <BathroomPage bathrooms = {list}/>
+      {/* <BathroomPage bathrooms = {list}/> */}
       <BathroomScreen/>
     </View>
   );

@@ -1,26 +1,25 @@
 import React, { Component } from "react";
 import { Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
+import { Overlay } from "react-native-elements";
 
 export default class RatingModal extends Component {
-  state = {
-    isModalVisible: false
-  };
-
-  toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModalVisible: this.props.isModalVisible
+    };
+  }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Button title="Show modal" onPress={this.toggleModal} />
-        <Modal isVisible={this.state.isModalVisible}>
-          <View style={{ flex: 1 }}>
-            <Text>Hello!</Text>
-            <Button title="Hide modal" onPress={this.toggleModal} />
-          </View>
-        </Modal>
+        <Overlay
+          isVisible={this.props.isModalVisible}
+          onBackdropPress= {this.props.onPress}
+        >
+          <Text>Hello from Overlay!</Text>
+        </Overlay>
       </View>
     );
   }

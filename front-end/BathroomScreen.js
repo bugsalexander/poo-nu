@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Rating, AirbnbRating } from "react-native-elements";
+import RatingModal from "./RatingModal";
 
 export default class BathroomScreen extends Component {
   constructor(props) {
@@ -15,24 +16,34 @@ export default class BathroomScreen extends Component {
     this.state = {
       titleText: "Churchill Hall: First Floor",
       numReviews: 51,
-      count: 0
+      count: 0,
+      isReviewVisible: false
     };
+    this.onPress = this.onPress.bind(this);
   }
 
   onPress = () => {
+    console.log("pres");
     this.setState({
-      count: this.state.count + 1
+      isReviewVisible: !this.state.isReviewVisible
     });
+  };
+
+  onBackPress = () => {
+    
   };
 
   render() {
     return (
       <View style={styles.baseText}>
+        <TouchableOpacity style={{marginBottom: 16}} onPress={this.onBackPress}>
+          <Text style={{fontSize: 16, color: 'blue'}}>Back</Text>
+        </TouchableOpacity>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={styles.titleText} onPress={this.onPressTitle}>
             {this.state.titleText}
           </Text>
-          <TouchableOpacity onPress={this.onPress}>
+          <TouchableOpacity>
             <Image
               style={{ width: 24, height: 24, marginTop: 2 }}
               source={require("./assets/bookmark.png")}
@@ -50,7 +61,8 @@ export default class BathroomScreen extends Component {
         </View>
         <View style={styles.line} />
         <View>
-          <TouchableOpacity>
+          <RatingModal onPress={this.onPress} isModalVisible={this.state.isReviewVisible}/>
+          <TouchableOpacity onPress={this.onPress}>
             <View
               style={{
                 flexDirection: "row",
