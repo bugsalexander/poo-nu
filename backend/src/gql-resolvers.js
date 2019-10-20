@@ -18,7 +18,7 @@ export function gql_resolver(database) {
     },
     Mutation: {
       addBathroom: (bad, args) => addBathroom(database, args.building_id, args.name, args.description, args.floor, args.male, args.female, args.all_gender, args.handicap_accessible, args.capacity),
-      addRating: (bad, args) => addRating(database, args.bathroomId, args.ratingContent),
+      addRating: (bad, args) => addRating(database, args.bathroomId, args.ratingContent, args.ratingValue),
     }
   };
 }
@@ -101,8 +101,8 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
 
   const query = ""
   + "call add_rating("
-  + bathroom_id
-  + rating_content
+  + bathroom_id + ", "
+  + "\"" + rating_content + "\"" + ", "
   + rating_value
   + ");";
 
