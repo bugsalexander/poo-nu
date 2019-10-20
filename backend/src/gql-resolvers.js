@@ -18,7 +18,7 @@ export function gql_resolver(database) {
       addBathroom: decorateCheckConnection(database, addBathroom),
       addRating: decorateCheckConnection(database, addRating)
     }
-  }
+  };
 }
 
 // scripts go here 
@@ -52,7 +52,7 @@ export function decorateCheckConnection(database, toBeDecorated) {
         return toBeDecorated.apply(this, args);
       }
     });
-  }
+  };
 }
 
 // query functions. query the sql database.
