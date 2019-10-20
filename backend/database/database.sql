@@ -189,7 +189,7 @@ CREATE PROCEDURE add_rating
 (
 	bathroom_id int(11),
     rating_content varchar(255),
-    rating_value int(4)
+    rating_value int(11)
 )
 begin
 	
@@ -223,8 +223,8 @@ from Building
 order by ft asc
 limit 20; -- count
 
--- FIND CLOSEST BATHROOMS (lat, long, count)
-select building_name, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
+-- FIND CLOSEST BATHROOMS (lat, long, count) RETURNS (building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, distance)
+select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
 ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
 from Building join Bathroom using (building_id)
 order by ft asc
@@ -245,10 +245,16 @@ from Building join Bathroom using (building_id)
 having ft < 1200 -- distance
 order by ft asc;
 
--- FIND BATHROOMS IN BUILDING (building_id)
-select *
+-- FIND BATHROOMS IN BUILDING (building_id) RETURNS (bathroom_id, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity)
+select bathroom_id, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity
 from Building join Bathroom using (building_id)
 where building_id = 1; -- building_id
+
+-- GET AVERAGE BATHROOM RATING (bathroom_id) RETURNS (avg_rating)
+select ROUND(avg(rating_value), 2)
+from Bathroom join Rating using (bathroom_id)
+where bathroom_id = 3
+group by bathroom_id;
 
  call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
 
@@ -259,14 +265,7 @@ call add_rating(6, 'Fantastic Poop', 6);
 select * from Rating;
 
 
-
 */
-
-
-
-
-
-
 
 
 
