@@ -19,7 +19,7 @@ export default class BathroomScreen extends Component {
       numReviews: 51,
       count: 0,
       isReviewVisible: false
-
+ 
     };
     this.onPress = this.onPress.bind(this);
     this.submit = this.submit.bind(this);
