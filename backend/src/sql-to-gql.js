@@ -10,16 +10,16 @@ export function reformatBathroom(sql_bathroom) {
   return {
     bathroom_id: sql_bathroom.bathroom_id,
     building_id: sql_bathroom.building_id,
-    name: sql_bathroom.name,
-    building_name: sql_bathroom.building_name,
-    description: sql_bathroom.description,
-    floor: sql_bathroom.floor,
-    male: sql_bathroom.male,
-    female: sql_bathroom.female,
-    all_gender: sql_bathroom.all_gender,
-    handicap_accessible: sql_bathroom.handicap_accessible,
-    average_rating: sql_bathroom.average_rating,
-    ratings: sql_bathroom.ratings
+    name: sql_bathroom.bathroom_name,
+    description: sql_bathroom.bathroom_description,
+    floor: sql_bathroom.bathroom_floor,
+    male: sql_bathroom.bathroom_male,
+    female: sql_bathroom.bathroom_female,
+    all_gender: sql_bathroom.bathroom_all_gender,
+    handicap_accessible: sql_bathroom.bathroom_handicap_accessible,
+    capacity: sql_bathroom.bathroom_capacity,
+    average_rating: 0,
+    ratings: []
   };
 }
 

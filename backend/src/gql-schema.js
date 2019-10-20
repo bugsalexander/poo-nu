@@ -24,7 +24,7 @@ const query = gql`
  */
 const mutation = gql`
   type Mutation {
-    addBathroom(building: Int!, name: String!, description: String!, floor: Int!, male: Int!, female: Int!, all_gender: Int!, handicap_accessible: Int!, capacity: Int!): Bathroom!
+    addBathroom(building_id: Int!, name: String!, description: String!, floor: Int!, male: Int!, female: Int!, all_gender: Int!, handicap_accessible: Int!, capacity: Int!): Bathroom!
     addRating(bathroomId: Int!, ratingContent: String!, ratingValue: Int!): BathroomRating!
   }
 `;
@@ -33,14 +33,14 @@ const mutation = gql`
  * A Bathroom is a bathroom.
  * @param bathroom_id a unique id
  * @param building_id the id of the building this bathroom is in
- * @param name the name 
- * @param building_name the name of the building
+ * @param name the name of the bathroom
  * @param description the description 
  * @param floor the floor number this bathroom is on
  * @param male is this a male bathroom?
  * @param female is this a female bathroom?
  * @param all_gender is this bathroom allgender?
  * @param handicap_accessible is this bathroom handicap accessible?
+ * @param capacity the capacity of the bathroom
  * @param average_rating is nullable, as we could sometimes have no ratings.
  * @param ratings the ratings of this bathroom. non-nullable, but may have the empty list.
  */
@@ -49,13 +49,13 @@ const bathroom_t = gql`
     bathroom_id: Int!
     building_id: Int!
     name: String!
-    building_name: String!
     description: String!
     floor: Int!
     male: Int!
     female: Int!
     all_gender: Int!
     handicap_accessible: Int!
+    capacity: Int!
     average_rating: Float
     ratings: [BathroomRating!]!
   }
