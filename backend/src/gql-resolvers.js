@@ -43,10 +43,7 @@ function getNearestBathrooms(database, latitude, longitude, count) {
     + limit
     + ";";
 
-  return database.query(query, (err, result, fields) => {
-    if (err) throw err;
-    return reformatBathroomList(result);
-  });
+  return queryDatabase(database, query);
 }
 
 function getNearestBuildings(database, latitude, longitude, count) {
@@ -67,12 +64,7 @@ function getNearestBuildings(database, latitude, longitude, count) {
   + count
   + ";";
 
-  return database.query(query, 
-    function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    return reformatBuildingList(result);
-  });
+  return queryDatabase(database, query);
 }
 
 function getBathroom(database, bathroom_id) {
@@ -82,13 +74,8 @@ function getBathroom(database, bathroom_id) {
   + "bathroom_capacity, building_name from Bathroom join Building using (building_id) where bathroom_id = "
   + bathroom_id
   + ";";
-
-  return database.query(query, 
-    function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    return reformatBathroom(result);
-  });
+  
+  return queryDatabase(database, query);
 }
 
 // mutation functions. mutate the database.
@@ -108,12 +95,8 @@ function addBathroom(database, building, name, description, floor, male, female,
   + capacity
   + ");";
 
-  return database.query(query, 
-    function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    return reformatBathroom(result);
-  });
+  return queryDatabase(database, query);
+  
 }
 
 function addRating(database, bathroom_id, rating_content, rating_value) {
@@ -125,10 +108,24 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
   + rating_value
   + ");";
 
-  return database.query(query, 
-    function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    return reformatBathroomRating(result);
+  return queryDatabase(database, query);
+}
+
+/**
+ * Queries the database for a certain query.
+ * @param {Connection} database the database
+ * @param {string} query the query
+ */
+function queryDatabase(database, query) {
+  return database.connect((err) => {
+    if (err) {
+      console.log(err);
+      return undefined;
+    } else {
+      return database.query(query, (err, result, fields) => {
+        if (err) throw err;
+        return reformatBathroomRating(result);
+      });
+    }
   });
 }
