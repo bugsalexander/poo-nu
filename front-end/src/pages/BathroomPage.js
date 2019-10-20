@@ -126,7 +126,7 @@ export default class BathroomPage extends Component {
     state = {
         initialPosition: 'unknown',
         lastPosition: 'unknown', 
-        query: null   
+        nearestBathrooms: null   
     }
 
     watchID = null;
@@ -144,12 +144,22 @@ export default class BathroomPage extends Component {
             this.setState({ lastPosition });
         });
 
-        const query = this.getNearestBathrooms(20);
+        const nearestBathrooms = this.getNearestBathrooms(20);
         this.setState({
-          query
+          nearestBathrooms
         });
-
     }
+
+    getGenderText(male, female, all_gender, handicap) {
+      if(all_gender == 1) {
+        return "All Gender";
+      } else if(female == 1) {
+        return "Female";
+      } else {
+        return "Male";
+      }
+    } 
+
     componentWillUnmount = () => {
         navigator.geolocation.clearWatch(this.watchID);
     }
@@ -157,7 +167,7 @@ export default class BathroomPage extends Component {
     getNearestBathrooms = (numBathrooms) => {
     const query = ` 
                 query {
-                    getNearestBathrooms(lat: 42, long: -71, count: 1) {
+                    getNearestBathrooms(lat: ${this.state.lastPosition.x}, long: ${this.state.lastPosition.y}, count: ${numBathrooms}) {
                     bathroom_id
                     building_id
                     name
@@ -171,7 +181,9 @@ export default class BathroomPage extends Component {
                     }
                   }`;
         request("http://35.199.57.159", query)
-                  .then(console.log)
+                  .then((result) => {
+                    return result;
+                  })
                   .catch(console.error); 
       }
 
@@ -184,24 +196,23 @@ export default class BathroomPage extends Component {
           showsHorizontalScrollIndicator={true}
           showsVerticalScrollIndicator={false}
         >
-          {list.map((elem, i) => {
+          {this.state.nearestBathrooms.map((elem, i) => {
             return (
               <View>
                 <BathroomPanel
                   lastPos={this.state.lastPosition}
-                  navigation={this.props.navigation}
                   key={i}
-                  bathroomName={elem.bathroomName}
-                  bathroomAddress={elem.bathroomAddress}
-                  genderText={elem.genderText}
-                  handicapText={elem.handicapText}
+                  bathroomName={elem.bathroom_name}
+                  bathroomAddress={elem.building_name}
+                  genderText={getGenderText(elem.male, elem.female, elem.all_gender, elem.handicap)}
+                  handicapText={elem.handicap ? "Handicapped" : ""}
                 />
                 <View style={styles.line} />
               </View>
             );
           })}
         </ScrollView>
-        <GoButton lastPos={this.state.lastPos} style={styles.button} />
+        <GoButton lastPos={this.state.lastPosition} style={styles.button} />
       </View>
     );
   }
@@ -212,7 +223,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 30,
+    padding: 30, 
     margin: 2,
     borderColor: "#2a4944",
     borderWidth: 1,

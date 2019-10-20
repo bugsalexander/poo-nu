@@ -51,14 +51,14 @@ export default class BathroomScreen extends Component {
     });
   };
 
-  submit(rating) {
+  submit(rating) {  
     console.log(rating);
     this.setState({
       isReviewVisible: false,
       isSubmitted: true,
       userRating: rating,
       hasReviewed: true
-    });
+    }); 
 
     // make submit rating request
   }
@@ -70,18 +70,14 @@ export default class BathroomScreen extends Component {
 
   addBathroomRating = () => {
   const query = ` 
-              mutation {
-                addRating(bathroomId: ${1}, ratingContent: ${}, ratingValue: ${this.state.userRating}) {
+             mutation {
+                addRating(bathroomId: ${1}, ratingContent: ${"Nice!"}, ratingValue: ${this.state.userRating}) {
                 }
               }`;
-      request("http://35.199.57.159", query)
-                .then((result) => {
-                  return result.data;
-                })
-                .catch(console.error); 
+      request("http://35.199.57.159", query).catch(console.error); 
     }
 
-  render() {
+  render() { 
     return (
       <View style={styles.baseText}>
         <ScrollView

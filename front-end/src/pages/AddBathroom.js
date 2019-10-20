@@ -15,6 +15,22 @@ const list = [
   { buildingName: "West Village H", buildingID: 8 }
 ];
 
+function getBuildings() {
+  const query = ` 
+             mutation {
+                getAllBuildings(count:999999)) {
+                  building_id,
+                  building_name,
+                  building_longitude,
+                  building_latitude
+                }
+              }`;
+      request("http://35.199.57.159", query)
+      .then((data) => {
+        return data;
+      }).catch(console.error); 
+}
+
 export default class AddBathroom extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +43,8 @@ export default class AddBathroom extends Component {
       female: null,
       all_gender: null,
       handicap: null,
-      capacity: null
+      capacity: null,
+      buildings: getBuildings()
     };
     this.submit = this.submit.bind(this);
   }
@@ -61,6 +78,17 @@ export default class AddBathroom extends Component {
       handicap: handicap,
       capacity: capacity
     });
+
+    addBathroom();
+  }
+
+  addBathroom = () => {
+    const query = ` 
+               mutation {
+                  addRating(building_id: ${this.state.building}, name:${this.state.name}, description:${this.state.description}, floor:${this.state.floor}, male:${this.state.male}, female:${this.state.female}, all_gender:${this.state.all_gender}, handicap_accessible: ${this.state.handicap}, capacity:${this.state.capacity}) {
+                  }
+                }`;
+        request("http://35.199.57.159", query).catch(console.error); 
   }
 
   render() {
@@ -78,8 +106,8 @@ export default class AddBathroom extends Component {
           <Text style={styles.textInput}>Building:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
-            items={list.map((elem, i) => {
-              return { label: elem.buildingName, value: elem.buildingName };
+            items={this.state.buildings.map((elem, i) => {
+              return {label: elem.building_name, value: elem.building_name };
             })}
           />
         </View>
@@ -87,8 +115,8 @@ export default class AddBathroom extends Component {
           <Text style={styles.textInput}>Floor:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
-            items={list.map((elem, i) => {
-              return { label: elem.buildingName, value: elem.buildingName };
+            items={this.state.buildings.map((elem, i) => {
+              return {label: elem.building_name, value: elem.building_name };
             })}
           />
         </View>
@@ -96,8 +124,8 @@ export default class AddBathroom extends Component {
           <Text style={styles.textInput}>Gender:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
-            items={list.map((elem, i) => {
-              return { label: elem.buildingName, value: elem.buildingName };
+            items={this.state.buildings.map((elem, i) => {
+              return {label: elem.building_name, value: elem.building_name };
             })}
           />
         </View>
