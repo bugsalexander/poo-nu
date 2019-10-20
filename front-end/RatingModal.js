@@ -11,7 +11,8 @@ export default class RatingModal extends Component {
       titleText: this.props.titleText,
       isModalVisible: this.props.isModalVisible,
       result: 3.5,
-      submit: this.props.submit
+      submit: this.props.submit,
+      isSubmitted: false
     };
     this.ratingCompleted = this.ratingCompleted.bind(this);
   }
