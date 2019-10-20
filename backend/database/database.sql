@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS poonu;
 CREATE DATABASE IF NOT EXISTS poonu;
 USE poonu;
 
--------------------------------------------- BUILDING
+-- BUILDING
 
 DROP TABLE IF EXISTS Building;
 CREATE TABLE Building (
@@ -99,7 +99,7 @@ INSERT INTO Building VALUES
 (84, "780 Columbus Avenue (780)", 42.336842, -71.086897);
 
 
--------------------------------------------- BATHROOM
+-- BATHROOM
 
 DROP TABLE IF EXISTS Bathroom;
 CREATE TABLE Bathroom (
@@ -121,7 +121,7 @@ INSERT INTO Bathroom VALUES
 (2, 2, "b2", "b2 desc", 3, 0, 1, 0, 0, 6),
 (3, 3, "b3", "b3 desc", 1, 1, 1, 1, 0, 7);
 
--------------------------------------------- RATING
+-- RATING
 
 DROP TABLE IF EXISTS Rating;
 CREATE TABLE Rating (
@@ -132,7 +132,7 @@ CREATE TABLE Rating (
     CONSTRAINT fk_rating_bathroom FOREIGN KEY (bathroom_id) REFERENCES Bathroom (bathroom_id)
 );
 
--------------------------------------------- IN USE
+-- IN USE
 
 DROP TABLE IF EXISTS In_Use;
 CREATE TABLE In_Use (
@@ -142,7 +142,7 @@ CREATE TABLE In_Use (
 );
 
 
--------------------------------------------- PROCEDURES --------------------------------------------------------
+-- PROCEDURES --------------------------------------------------------
 -- ADD BATHROOM
 DROP PROCEDURE IF EXISTS add_bathroom
 DELIMITER //
