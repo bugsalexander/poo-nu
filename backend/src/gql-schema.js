@@ -10,10 +10,12 @@ import { gql } from 'apollo-server';
   * @param getBathrooms list of bathrooms
   * @param getBuildings list of buildings
   */
-const Request = gql`
+const request = gql`
   type Query {
-    getBathrooms: [Bathroom!]!
-    getBuildings: [Building!]!
+    getNearestBathrooms(lat: Float!, long: Float!, count: Int!): [Bathroom!]!
+    getNearestBuildings(lat: Float!, long: Float!, count: Int!): [Building!]!
+    getRatings(bathroomId: Int!): [BathroomRating!]!
+    getAverageRating(bathroomId: Int!): Float!
   }
 `;
 
@@ -21,21 +23,10 @@ const Request = gql`
  * Mutation to add a bathroom.
  * Users can add bathrooms, but not buildings.
  */
-const Mutation = gql`
+const mutation = gql`
   type Mutation {
-    """
-    adds a bathroom.
-    """
-    addBathroom(
-      building: Int, 
-      name: String, 
-      description: String, 
-      floor: Int, 
-      male: Boolean, 
-      female: Boolean, 
-      all_gender: Boolean, 
-      handicap_accessible: Boolean
-    ): Bathroom
+    addBathroom(building: Int!, name: String!, description: String!, floor: Int!, male: Boolean!, female: Boolean!, all_gender: Boolean!, handicap_accessible: Boolean!,capacity: Int!): Bathroom!,
+    addRating(bathroomId: Int!, ratingContent: String!, ratingValue: Int!),
   }
 `;
 
@@ -51,7 +42,7 @@ const Mutation = gql`
  * @param all_gender is this bathroom allgender?
  * @param handicap_accessible is this bathroom handicap accessible?
  */
-const Bathroom = gql`
+const bathroom_t = gql`
   type Bathroom {
     """
     A bathroom.
@@ -69,13 +60,24 @@ const Bathroom = gql`
 `;
 
 /**
+ * A Bathroom has a rating.
+ */
+const bathroom_rating_t = gql`
+  type BathroomRating {
+    bathroom_id: Int!
+    rating_content: String!
+    rating_value: Int!
+  }
+`;
+
+/**
  * A Building is a building, with bathroom.
  * @param id the unique id 
  * @param name the name 
  * @param longitude the longitude
  * @param latitude the latitude
  */
-const Building = gql`
+const building_t = gql`
   type Building {
     """
     A building.
@@ -89,8 +91,9 @@ const Building = gql`
 
 // export the type definitions 
 export const typeDefs = [
-  Request,
-  Mutation,
-  Bathroom,
-  Building
+  request,
+  mutation,
+  bathroom_t,
+  bathroom_rating_t,
+  building_t
 ];
