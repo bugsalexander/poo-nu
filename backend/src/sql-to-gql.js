@@ -7,11 +7,11 @@
  * @param {*} sql_bathroom the sql formatted bathroom.
  */
 export function reformatBathroom(sql_bathroom) {
-  console.log(sql_bathroom);
-  console.log(sql_bathroom.building_id);
+  sql_bathroom = sql_bathroom.bathroom_id ? sql_bathroom : sql_bathroom[0];
+
   return {
     bathroom_id: sql_bathroom.bathroom_id,
-    building_id: 0, // sql_bathroom.building_id,
+    building_id: sql_bathroom.building_id,
     name: sql_bathroom.bathroom_name,
     description: sql_bathroom.bathroom_description,
     floor: sql_bathroom.bathroom_floor,
@@ -22,7 +22,7 @@ export function reformatBathroom(sql_bathroom) {
     capacity: sql_bathroom.bathroom_capacity,
     average_rating: 0,
     ratings: [],
-    distance: Math.max(sql_bathroom.ft, 0),
+    distance: sql_bathroom.ft ? sql_bathroom.ft : 0,
     building_name: sql_bathroom.building_name,
   };
 }
