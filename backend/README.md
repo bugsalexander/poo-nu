@@ -28,3 +28,5 @@ In order for the server to run, it has to be able to communicate with the SQL da
 ```
 
 To launch the Apollo server, then navigate to the backend directory, and run `yarn` or `npm install`, followed by `yarn server` or `npm run server`. The Apollo server should then be running, displayed with a message. The server currently prints out the requests it receives, and the passed-back data.
+
+By default, the Apollo server listens on port 4000.
