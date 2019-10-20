@@ -8,9 +8,10 @@
  */
 export function reformatBathroom(sql_bathroom) {
   console.log(sql_bathroom);
+  console.log(sql_bathroom.building_id);
   return {
     bathroom_id: sql_bathroom.bathroom_id,
-    building_id: sql_bathroom.building_id,
+    building_id: 0, // sql_bathroom.building_id,
     name: sql_bathroom.bathroom_name,
     description: sql_bathroom.bathroom_description,
     floor: sql_bathroom.bathroom_floor,
