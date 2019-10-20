@@ -16,7 +16,8 @@ const database = createConnection(login);
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
-const server = new ApolloServer({ typeDefs, gql_resolver(database) });
+const resolvers = gql_resolver(database);
+const server = new ApolloServer({ typeDefs, resolvers });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
