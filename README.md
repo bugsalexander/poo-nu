@@ -29,3 +29,5 @@ Ideally, we will make Poo-NU into a published application and submit it to app s
  We considered providing the opportunity to add images, but felt that this could be too much of a privacy concern for others in the restroom; however, the visual appeal of the bathroom is certainly a factor, and alternative approaches such as similar stock photos should be pursued in the future. We could also evaluate reviews of these restrooms to pick buzzwords and characteristics associated with certain types of restrooms, recommending restrooms to users based on the frequency and recency of their reviews as well as their tendency towards a certain type of restroom (after all, cleanliness isn't the only priority when considering such accommodations). 
 
 Tl, dr; we'd love to continue to pursue building this application to ensure that everyone has a pleasant experience. 
+
+Built at HackHarvard 2019.
