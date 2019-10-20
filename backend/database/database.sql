@@ -125,7 +125,7 @@ INSERT INTO Bathroom VALUES
 
 DROP TABLE IF EXISTS Rating;
 CREATE TABLE Rating (
-	rating_id int(11) PRIMARY KEY,
+	rating_id int(11) PRIMARY KEY AUTO_INCREMENT,
     bathroom_id int(11),
     rating_content varchar(255) NOT NULL,
     rating_value int(4) NOT NULL,
@@ -167,7 +167,8 @@ begin
     -- insert into Bathroom table
     else
         INSERT INTO Bathroom VALUES
-            (   building_id,
+            (   0,
+				building_id,
                 name,
                 description,
                 floor,
@@ -179,12 +180,41 @@ begin
     end if;
 
 end //
-
-
 DELIMITER ;
 
+-- ADD RATING
+DROP PROCEDURE IF EXISTS add_rating
+DELIMITER //
+CREATE PROCEDURE add_rating
+(
+	bathroom_id int(11),
+    rating_content varchar(255),
+    rating_value int(4)
+)
+begin
+	
+	-- check if bathroom exists
+    if bathroom_id not in (select b.bathroom_id from Bathroom b) then
+		signal sqlstate 'HY000' set message_text = 'Bathroom not found!';
+        
+        
+	elseif (rating_value > 10) or (rating_value < 0) then
+		signal sqlstate 'HY000' set message_text = 'Invalid Rating!';
+	
+    -- insert into Rating table
+    else
+		INSERT INTO Rating VALUES
+        (	0,
+			bathroom_id,
+            rating_content,
+            rating_value
+		);
+	end if;
+    
+end //
+DELIMITER ;
 
-
+/*
 
 -- FIND CLOSEST BUILDINGS (lat, long, count)
 select *,
@@ -220,11 +250,17 @@ select *
 from Building join Bathroom using (building_id)
 where building_id = 1; -- building_id
 
+ call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
+
+select * from Bathroom;
+
+call add_rating(6, 'Fantastic Poop', 6);
+
+select * from Rating;
 
 
 
-
-
+*/
 
 
 
