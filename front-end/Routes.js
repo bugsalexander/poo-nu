@@ -5,22 +5,23 @@ import BathroomPage from './src/pages/BathroomPage';
 import { StyleSheet, Text, View } from 'react-native';
 
 const Routes = () => (
-   <Router sceneStyle={styles.container}>
+   <Router sceneStyle={styles.container} navigationBarStyle = {{width:'100%'}} titleStyle = {{width:'100%'}}>
       <Scene key = "root" >
          <Scene key = "home" component = {BathroomPage} title = "Home" initial = {true} />
-         <Scene key = "info" component = {BathroomScreen} title = "Bathroom Info" />
-      </Scene>    
+         <Scene key = "info" component = {BathroomScreen} title = "Bathroom Info" /> 
+      </Scene>     
    </Router>   
 )
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0,
+        flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width:'100%'
+        width:'100%',
+        justifyContent: 'center'
     },
 }); 
 
+//         justifyContent: 'center',
+// align items center
 export default Routes

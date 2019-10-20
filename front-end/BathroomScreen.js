@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   baseText: {
     // fontFamily: "Cochin"
     width: "80%",
-    flex: 0.8,
+    flex: 0.8
   },
   titleText: {
     fontSize: 22,
