@@ -18,6 +18,7 @@ export default class BathroomScreen extends Component {
     this.state = {
       // bathroom: props.bathroom,
       titleText: props.bathroomName,
+      lastPos: props.lastPos,// this is the position of the current person
       numReviews: 51,
       count: 0,
       isReviewVisible: false,

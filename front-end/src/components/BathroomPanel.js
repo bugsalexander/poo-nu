@@ -18,7 +18,7 @@ export default class BathroomPanel extends Component {
     render() {
         return (
         <View style = {{alignItems: 'center', width: '100%'}} >
-            <Text onPress ={() => {Actions.info({bathroomName: this.props.bathroomName})}} style = {styles.titleText}> {this.props.bathroomName}</Text>
+            <Text onPress ={() => {Actions.info({lastPos: this.props.lastPos, bathroomName: this.props.bathroomName})}} style = {styles.titleText}> {this.props.bathroomName}</Text>
             <Text>{this.props.bathroomAddress}</Text>
             <View style={styles.line} />
         </View>
