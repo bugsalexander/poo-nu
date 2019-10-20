@@ -12,27 +12,32 @@ import { Button } from 'react-native-elements';
 
 export default class GoButton extends Component {
 
-/*  getNearestBathroom = () => {
-    return `
-      query {
-        getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:1) {
-            bathroom_id
-            building_id
-            name
-            building_name
-            description
-            floor
-            male
-            female
-            all_gender
-            handicap_accessible
-        }
-      }
-    `
-  }*/
+  getNearestBathroom = () => {
+    axios({
+        url:'localhost://3000 or something',
+        method: 'get',
+        data: {
+            query: "query {"
+                + "getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:${numBathrooms}) {"
+                +  "bathroom_id" 
+                +  "building_id"
+                +  "name"
+                +  "building_name"
+                +  "description"
+                +  "floor"
+                +  "male"
+                +  "female"
+                +  "all_gender"
+                +  "handicap_accessible"
+              }
+    }).then((result) => {
+        console.log(result.data);
+        return result.data;
+    });
+  }
 
   goToNearestBathroom() {
-    const query = this.getNearestBathrooms(20);
+    const query = this.getNearestBathroom();
     this.setState({
       query
     });

@@ -11,6 +11,7 @@ import {
 import { Rating, AirbnbRating } from "react-native-elements";
 import RatingModal from "../components/RatingModal";
 import { Actions } from "react-native-router-flux";
+import axios from 'axios';
 
 export default class BathroomScreen extends Component {
   constructor(props) {
@@ -47,15 +48,23 @@ export default class BathroomScreen extends Component {
     // make submit rating request
   }
 
+// this.state.bathroomId
+// this.state.ratingContent
 
   publishRatingQuery = () => {
-    return `
-      mutation {
-        addRating(bathroomId: ${this.state.bathroomId}, ratingContent: ${this.state.ratingContent}, ratingValue: ${this.state.userRating}) {
-            
-        }
+    axios({
+      url:'localhost://3000 or something',
+      method: 'post',
+      data: {
+        mutation: "mutation {" 
+          + "addRating(bathroomId: ${1}, ratingContent: ${}, ratingValue: ${this.state.userRating}) {  "
+        + "}"
+      +"}"
       }
-    `
+    }).then((result) => {
+      console.log(result.data);
+      return result.data;
+    }); 
   }
 
   render() {
