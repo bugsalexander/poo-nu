@@ -2,6 +2,8 @@
  * This file is part of Poo-NU.
  * This file contains the GraphQL resolver.
  */
+
+import { reformatBathroom, reformatBathrooms, reformatBuildings, reformatBathroomRating } from "./sql-to-gql";
  
 /**
  * Produces the resolver object for GraphQL
@@ -42,7 +44,7 @@ function getNearestBathrooms(database, latitude, longitude, count) {
     + limit
     + ";";
 
-  return queryDatabase(database, query);
+  return queryDatabase(database, query, reformatBathrooms);
 }
 
 function getNearestBuildings(database, latitude, longitude, count) {
@@ -57,7 +59,7 @@ function getNearestBuildings(database, latitude, longitude, count) {
   + count
   + ";";
 
-  return queryDatabase(database, query);
+  return queryDatabase(database, query, reformatBuildings);
 }
 
 function getBathroom(database, bathroom_id) {
@@ -68,7 +70,7 @@ function getBathroom(database, bathroom_id) {
   + bathroom_id
   + ";";
   
-  return queryDatabase(database, query);
+  return queryDatabase(database, query, reformatBathroom);
 }
 
 // mutation functions. mutate the database.
@@ -88,7 +90,7 @@ function addBathroom(database, building, name, description, floor, male, female,
   + capacity
   + ");";
 
-  return queryDatabase(database, query);
+  return queryDatabase(database, query, reformatBathroom);
   
 }
 
@@ -101,15 +103,16 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
   + rating_value
   + ");";
 
-  return queryDatabase(database, query);
+  return queryDatabase(database, query, reformatBathroomRating);
 }
 
 /**
  * Queries the database for a certain query.
  * @param {Connection} database the database
  * @param {string} query the query
+ * @param {*} formatter a formatter function
  */
-function queryDatabase(database, query) {
+function queryDatabase(database, query, formatter) {
   return database.connect((err) => {
     if (err) {
       console.log(err);
@@ -117,7 +120,7 @@ function queryDatabase(database, query) {
     } else {
       return database.query(query, (err, result, fields) => {
         if (err) throw err;
-        return reformatBathroomRating(result);
+        return formatter(result);
       });
     }
   });
