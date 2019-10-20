@@ -215,7 +215,7 @@ end //
 DELIMITER ;
 
 /*
-
+*/
 -- FIND CLOSEST BUILDINGS (lat, long, count)
 select *,
 ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
@@ -268,7 +268,7 @@ group by bathroom_id;
 select bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, building_name
 from Bathroom join Building using (building_id)
 where bathroom_id = 1;
-
+/*
 
  call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
 

@@ -67,13 +67,14 @@ export function decorateCheckConnection(database, toBeDecorated) {
 function getNearestBathrooms(database, latitude, longitude, count) {
 
   const query = ""
-  + "SELECT *, ROUND(((SQRT(POWER((building_latitude - " 
-  + latitude 
-  + "), 2) + POWER((building_longitude - " 
-  + longitude 
-  + "), 2)) * 10000 / 90) * 3280.4), 0) as ft FROM Building order by ft asc limit " 
-  + count 
-  + ";"
+    + "select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, "
+    + "bathroom_handicap_accessible, bathroom_capacity, ROUND(((SQRT(POWER((building_latitude - "
+    + latitude
+    + "), 2) + POWER((building_longitude - "
+    + longitude 
+    + "), 2)) * 10000 / 90) * 3280.4), 0) as ft from Building join Bathroom using (building_id) order by ft asc "
+    + limit
+    + ";";
 
   return database.query(query, (err, result, fields) => {
     if (err) throw err;
@@ -83,42 +84,78 @@ function getNearestBathrooms(database, latitude, longitude, count) {
 
 function getNearestBuildings(database, latitude, longitude, count) {
 
-  return database.query("", 
+  const query = ""
+  + "select *, ROUND(((SQRT(POWER((building_latitude - "
+  + latitude
+  + "), 2) + POWER((building_longitude - "
+  + longitude
+  + "), 2)) * 10000 / 90) * 3280.4), 0) as ft "
+  + "from Building order by ft asc limit "
+  + count
+  + ";";
+
+  return database.query(query, 
     function (err, result, fields) {
     if (err) throw err;
     console.log(result);
-    return reformatBathroomList(result);
+    return reformatBuildingList(result);
   });
 }
 
-function getBathroom(database, latitude, longitude, count) {
+function getBathroom(database, bathroom_id) {
 
-  return database.query("", 
+  const query = ""
+  + "select bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, "
+  + "bathroom_capacity, building_name from Bathroom join Building using (building_id) where bathroom_id = "
+  + bathroom_id
+  + ";";
+
+  return database.query(query, 
     function (err, result, fields) {
     if (err) throw err;
     console.log(result);
-    return reformatBathroomList(result);
+    return reformatBathroom(result);
   });
 }
 
 // mutation functions. mutate the database.
 
-function addBathroom(database, latitude, longitude, count) {
+function addBathroom(database, building, name, description, floor, male, female, all_gender, handicap_accessible, capacity) {
 
-  return database.query("", 
+  const query = ""
+  + "call add_bathroom("
+  + building
+  + name
+  + description
+  + floor
+  + male
+  + female
+  + all_gender
+  + handicap_accessible
+  + capacity
+  + ");";
+
+  return database.query(query, 
     function (err, result, fields) {
     if (err) throw err;
     console.log(result);
-    return reformatBathroomList(result);
+    return reformatBathroom(result);
   });
 }
 
-function addRating(database, latitude, longitude, count) {
+function addRating(database, bathroom_id, rating_content, rating_value) {
 
-  return database.query("", 
+  const query = ""
+  + "call add_rating("
+  + bathroom_id
+  + rating_content
+  + rating_value
+  + ");";
+
+  return database.query(query, 
     function (err, result, fields) {
     if (err) throw err;
     console.log(result);
-    return reformatBathroomList(result);
+    return reformatBathroomRating(result);
   });
 }
