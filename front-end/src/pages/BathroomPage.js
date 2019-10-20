@@ -89,11 +89,7 @@ export default class BathroomPage extends Component {
             <ScrollView style={{flex: 0.8}} horizontal = {false} showsHorizontalScrollIndicator={true} showsVerticalScrollIndicator = {false}>
                 {list.map((elem, i) => {return <BathroomPanel lastPos = {this.state.lastPosition} navigation = {this.props.navigation} key = {i} bathroomName = {elem.bathroomName} bathroomAddress = {elem.bathroomAddress} />})}
             </ScrollView>
-<<<<<<< HEAD
-            <GoButton lastPos = {this.state.lastPos} style ={{flex: 0.2, marginBottom: 0}}/>
-=======
-            <GoButton style ={styles.button}/>
->>>>>>> 8d9b5c627a9b87a9767d224b734fdcc9130e3475
+            <GoButton lastPos = {this.state.lastPos} style ={styles.button}/>
             </View>
         );
     }

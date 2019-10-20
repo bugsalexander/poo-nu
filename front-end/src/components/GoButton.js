@@ -7,11 +7,8 @@ import {
   Alert,
 } from 'react-native';
 import Constants from 'expo-constants';
-<<<<<<< HEAD
 import { Actions } from 'react-native-router-flux';
-=======
 import { Button } from 'react-native-elements';
->>>>>>> 8d9b5c627a9b87a9767d224b734fdcc9130e3475
 
 export default class GoButton extends Component {
 
@@ -49,13 +46,8 @@ export default class GoButton extends Component {
         <SafeAreaView style={styles.container}>
           <View>
             <Button
-<<<<<<< HEAD
-              title="GO!"
-              onPress={() => this.goToNearestBathroom()}
-=======
               title="I gotta go."
-              onPress={() => Alert.alert('pranked')}
->>>>>>> 8d9b5c627a9b87a9767d224b734fdcc9130e3475
+              onPress={() => this.goToNearestBathroom()}
             />
             <Text style = {styles.boldText}>
                Initial position: {this.state.initialPosition} Current: {this.state.lastPosition}
