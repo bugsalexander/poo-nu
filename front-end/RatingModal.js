@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, View, TextInput } from "react-native";
 import Modal from "react-native-modal";
-import { Overlay } from "react-native-elements";
-import { Rating, AirbnbRating } from "react-native-ratings";
+import { Overlay, Input } from "react-native-elements";
+import { AirbnbRating } from "react-native-ratings";
 
 export default class RatingModal extends Component {
   constructor(props) {
@@ -12,7 +12,8 @@ export default class RatingModal extends Component {
       isModalVisible: this.props.isModalVisible,
       result: 3.5,
       submit: this.props.submit,
-      isSubmitted: false
+      isSubmitted: false,
+      text: ''
     };
     this.ratingCompleted = this.ratingCompleted.bind(this);
   }
@@ -23,7 +24,6 @@ export default class RatingModal extends Component {
       result: rating
     });
   }
-  
 
   render() {
     return (
@@ -50,10 +50,19 @@ export default class RatingModal extends Component {
               style={styles.rating}
               onFinishRating={this.ratingCompleted}
             />
+            {/* <TextInput
+              style={{ height: '50%', borderColor: "gray", borderWidth: 1, margin: 16 }}
+              onChangeText={text => onChangeText(text)}
+              value={value}
+              multiline
+              numberOfLines = {10}
+            /> */}
             <TextInput
               style={{ height: '50%', borderColor: "gray", borderWidth: 1, margin: 16 }}
-              // onChangeText={text => onChangeText(text)}
-              // value={value}
+              placeholder="Leave a review here!"
+              onChangeText={text => this.setState({ text })}
+              value={this.state.text}
+              multiline
             />
             <Button
               style={{}}
@@ -75,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   view: {
-    // flex: 1
+    flex: 1
   },
   titleText: {
     fontSize: 20,

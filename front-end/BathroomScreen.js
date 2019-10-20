@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Image,
+  Alert,
   TouchableHighlight,
   TouchableOpacity
 } from "react-native";
@@ -18,8 +19,9 @@ export default class BathroomScreen extends Component {
       titleText: props.bathroomName,
       numReviews: 51,
       count: 0,
-      isReviewVisible: false
- 
+      isReviewVisible: false,
+      userRating: 0,
+      hasReviewed: false
     };
     this.onPress = this.onPress.bind(this);
     this.submit = this.submit.bind(this);
@@ -31,15 +33,15 @@ export default class BathroomScreen extends Component {
     });
   };
 
-  onBackPress = () => {
-    
-  };
+  onBackPress = () => {};
 
   submit(rating) {
-    console.log(rating)
+    console.log(rating);
     this.setState({
       isReviewVisible: false,
-      isSubmitted: true
+      isSubmitted: true,
+      userRating: rating,
+      hasReviewed: true
     });
   }
 
@@ -68,8 +70,13 @@ export default class BathroomScreen extends Component {
         </View>
         <View style={styles.line} />
         <View>
-          <RatingModal submit={this.submit} titleText={this.state.titleText} onPress={this.onPress} isModalVisible={this.state.isReviewVisible}/>
-          <TouchableOpacity onPress={this.onPress}>
+          <RatingModal
+            submit={this.submit}
+            titleText={this.state.titleText}
+            onPress={this.onPress}
+            isModalVisible={this.state.isReviewVisible}
+          />
+          <TouchableOpacity disabled={this.state.hasReviewed} onPress={this.onPress}>
             <View
               style={{
                 flexDirection: "row",
@@ -79,13 +86,17 @@ export default class BathroomScreen extends Component {
               }}
             >
               <Text style={{ paddingTop: 2 }}>Start a Review...</Text>
-              <Rating imageSize={20} readonly startingValue={0} />
+              <Rating
+                imageSize={20}
+                readonly
+                startingValue={this.state.userRating}
+              />
             </View>
           </TouchableOpacity>
 
           <View style={styles.smallLine} />
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => Alert.alert("Thanks for flushing!")}>
             <View
               style={{
                 flexDirection: "row",
