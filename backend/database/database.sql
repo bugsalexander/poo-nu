@@ -230,6 +230,14 @@ from Building join Bathroom using (building_id)
 order by ft asc
 limit 5; -- count
 
+-- FIND CLOSEST BATHROOMS W AVG RATING (lat, long, count) RETURNS (building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, distance, avg_rating)
+select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
+ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft, -- latitude, longitude
+avg(rating_value)
+from Building join Bathroom using (building_id) left join Rating using (bathroom_id)
+group by building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, ft
+order by ft asc
+limit 100; -- count
 
 -- FIND BUILDINGS WITHIN (lat, long, distance)
 select *,
@@ -266,12 +274,4 @@ select * from Rating;
 
 
 */
-
-
-
-
-
-
-
-
 
