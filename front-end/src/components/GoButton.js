@@ -9,6 +9,7 @@ import {
 import Constants from 'expo-constants';
 import { Actions } from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
+import axios from 'axios';
 
 export default class GoButton extends Component {
 
@@ -17,22 +18,26 @@ export default class GoButton extends Component {
         url:'localhost://3000 or something',
         method: 'get',
         data: {
-            query: "query {"
-                + "getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:${numBathrooms}) {"
-                +  "bathroom_id" 
-                +  "building_id"
-                +  "name"
-                +  "building_name"
-                +  "description"
-                +  "floor"
-                +  "male"
-                +  "female"
-                +  "all_gender"
+            query: "{"
+                + "getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:${numBathrooms}) { "
+                +  "bathroom_id " 
+                +  "building_id "
+                +  "name "
+                +  "building_name "
+                +  "description "
+                +  "floor "
+                +  "male "
+                +  "female "
+                +  "all_gender "
                 +  "handicap_accessible"
+                + "}"
+                + "}"
               }
     }).then((result) => {
         console.log(result.data);
-        return result.data;
+        return result.data;d
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
