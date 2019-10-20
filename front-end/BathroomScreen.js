@@ -9,12 +9,13 @@ import {
 } from "react-native";
 import { Rating, AirbnbRating } from "react-native-elements";
 import RatingModal from "./RatingModal";
+import { Actions } from "react-native-router-flux";
 
 export default class BathroomScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      titleText: "Churchill Hall: First Floor",
+      titleText: props.bathroomName,
       numReviews: 51,
       count: 0,
       isReviewVisible: false
@@ -29,16 +30,9 @@ export default class BathroomScreen extends Component {
     });
   };
 
-  onBackPress = () => {
-    
-  };
-
   render() {
     return (
       <View style={styles.baseText}>
-        <TouchableOpacity style={{marginBottom: 16}} onPress={this.onBackPress}>
-          <Text style={{fontSize: 16, color: 'blue'}}>Back</Text>
-        </TouchableOpacity>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={styles.titleText} onPress={this.onPressTitle}>
             {this.state.titleText}
@@ -105,7 +99,7 @@ const styles = StyleSheet.create({
   baseText: {
     // fontFamily: "Cochin"
     width: "80%",
-    flex: 0.8
+    flex: 0.8,
   },
   titleText: {
     fontSize: 22,

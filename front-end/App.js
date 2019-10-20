@@ -24,17 +24,16 @@ const list = [
   {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'}]
 import BathroomScreen from "./BathroomScreen.js";
 import RatingModal from "./RatingModal.js";
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { AppRegistry} from 'react-native';
+import Routes from './Routes';
 
-
-
-export default function App() {
+function App() {
   return (
-    <View style={styles.container}>
-      {/* <BathroomPage bathrooms = {list}/> */}
-      <BathroomScreen/>
-    </View>
+    <Routes styles = {styles.container} />
   );
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
@@ -43,4 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}); 
+
+export default App
+AppRegistry.registerComponent('App', () => App)
