@@ -1,23 +1,42 @@
 import React, {Component} from 'react';
 
-import {SafeAreaView, Text, View, StyleSheet, ScrollView, SectionList } from 'react-native';
+import {SafeAreaView, Text, Button, View, StyleSheet, ScrollView, SectionList } from 'react-native';
 import BathroomPanel from '../components/BathroomPanel';
 import GoButton from '../components/GoButton';
+
+const list = [ 
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'}]
 
 export default class BathroomPage extends Component {
     render() {
         return (
             <View style={{ marginTop: 40, width: '100%', height:'100%'}}>
             <ScrollView style={{flex: 0.8}} horizontal = {false} showsHorizontalScrollIndicator={true} showsVerticalScrollIndicator = {false}>
-                {this.props.bathrooms.map((elem, i) => {return <BathroomPanel key = {i} bathroomName = {elem.bathroomName} bathroomAddress = {elem.bathroomAddress} />})}
+                {list.map((elem, i) => {return <BathroomPanel navigation = {this.props.navigation} key = {i} bathroomName = {elem.bathroomName} bathroomAddress = {elem.bathroomAddress} />})}
             </ScrollView>
             <GoButton style ={{flex: 0.2, marginBottom: 0}}/>
             </View>
         );
     }
 }
-//             
-
 
 const styles = StyleSheet.create ({
     item: {
