@@ -10,44 +10,15 @@
 export function gql_resolver(database) {
   return {
     Query: {
-      getNearestBathrooms: decorateCheckConnection(database, getNearestBathrooms),
-      getNearestBuildings: decorateCheckConnection(database, getNearestBuildings),
-      getBathroom: decorateCheckConnection(database, getBathroom)
+      getNearestBathrooms: (lat, long, count) => getNearestBathrooms(database, lat, long, count),
+      getNearestBuildings: (lat, long, count) => getNearestBuildings(database, lat, long, count),
+      getBathroom: (id) => getBathroom(database, id)
     },
     Mutation: {
-      addBathroom: decorateCheckConnection(database, addBathroom),
-      addRating: decorateCheckConnection(database, addRating)
+      addBathroom: (building, name, description, floor, male, female, all_gender, handicap_accessible, capacity) => 
+      addBathroom(database, building, name, description, floor, male, female, all_gender, handicap_accessible, capacity),
+      addRating: (bathroomId, ratingContent) => addRating(database, bathroomId, ratingContent),
     }
-  };
-}
-
-// scripts go here 
-
-/**
- * Curries the decorater to the inner function. Produces a function requires only the imporant args (not the database).
- * decorator: Database [ ... => Result] => [ ... => Result]
- * @param {Connection} database
- * @param {*} toBeDecorated the function to wrap
- */
-export function decorateCheckConnection(database, toBeDecorated) {
-  
-  // return a new function.
-  return function(... innerArgs) {
-
-    // attempt to connect to the database.
-    return database.connect(function(err) {
-      if (err) {
-        console.log(err);
-        return undefined;
-      } else {
-
-        // tack on the database to the front of the inner function's arguments.
-        innerArgs.unshift(database);
-
-        // return the decorated function, curried with the database at the front of the arguments.
-        return toBeDecorated.apply(this, innerArgs);
-      }
-    });
   };
 }
 
