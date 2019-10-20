@@ -24,8 +24,8 @@ const request = gql`
  */
 const mutation = gql`
   type Mutation {
-    addBathroom(building: Int!, name: String!, description: String!, floor: Int!, male: Boolean!, female: Boolean!, all_gender: Boolean!, handicap_accessible: Boolean!,capacity: Int!): Bathroom!,
-    addRating(bathroomId: Int!, ratingContent: String!, ratingValue: Int!),
+    addBathroom(building: Int!, name: String!, description: String!, floor: Int!, male: Boolean!, female: Boolean!, all_gender: Boolean!, handicap_accessible: Boolean!, capacity: Int!): Bathroom!
+    addRating(bathroomId: Int!, ratingContent: String!, ratingValue: Int!): BathroomRating!
   }
 `;
 
