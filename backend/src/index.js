@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 import { typeDefs } from './gql-schema';
-import { gql_resolver } from './gql-produce';
+import { gql_resolver } from './gql-resolvers'
 import { createConnection } from 'mysql';
 import { readFileSync } from 'fs';
 
