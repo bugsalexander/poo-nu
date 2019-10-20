@@ -19,16 +19,28 @@ export default class BathroomScreen extends Component {
       numReviews: 51,
       count: 0,
       isReviewVisible: false
+
     };
     this.onPress = this.onPress.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   onPress = () => {
-    console.log("pres");
     this.setState({
       isReviewVisible: !this.state.isReviewVisible
     });
   };
+
+  onBackPress = () => {
+    
+  };
+
+  submit(rating) {
+    console.log(rating)
+    this.setState({
+      isReviewVisible: false
+    });
+  }
 
   render() {
     return (
@@ -55,7 +67,7 @@ export default class BathroomScreen extends Component {
         </View>
         <View style={styles.line} />
         <View>
-          <RatingModal onPress={this.onPress} isModalVisible={this.state.isReviewVisible}/>
+          <RatingModal submit={this.submit} titleText={this.state.titleText} onPress={this.onPress} isModalVisible={this.state.isReviewVisible}/>
           <TouchableOpacity onPress={this.onPress}>
             <View
               style={{
