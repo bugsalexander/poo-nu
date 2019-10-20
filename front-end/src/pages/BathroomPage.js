@@ -4,39 +4,6 @@ import {SafeAreaView, ActivityIndicator, Text, Button, View, StyleSheet, ScrollV
 import BathroomPanel from '../components/BathroomPanel';
 import GoButton from '../components/GoButton';
 import {request} from 'graphql-request';
-const list = [ 
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
-    {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'}];
-
-import {
-  SafeAreaView,
-  ActivityIndicator,
-  Text,
-  Button,
-  View,
-  StyleSheet,
-  ScrollView,
-  SectionList
-} from "react-native";
-import BathroomPanel from "../components/BathroomPanel";
-import GoButton from "../components/GoButton";
 import axios from "axios";
 const list = [
   {
