@@ -121,6 +121,7 @@ function queryDatabase(database, query, formatter) {
       console.log("----------------------------------------------------------------------------");
       const formatted = formatter(result);
       console.log(formatted);
+      console.log(formatted instanceof Array);
       console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
       return formatter(result);
     });

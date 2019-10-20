@@ -43,7 +43,7 @@ export function reformatBuildings(sql_buildings) {
   function reformatBuilding(single) {
     return {
       building_id: single.building_id,
-      building_name: single.name,
+      building_name: single.building_name,
       building_latitude: single.building_latitude,
       building_longitude: single.building_longitude,
     };
