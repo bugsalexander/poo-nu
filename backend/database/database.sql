@@ -145,7 +145,9 @@ CREATE TABLE In_Use (
 -- PROCEDURES --------------------------------------------------------
 -- ADD BATHROOM
 DROP PROCEDURE IF EXISTS add_bathroom
+ 
 DELIMITER //
+ 
 CREATE PROCEDURE add_bathroom
 (
     building_id int(11),
@@ -176,15 +178,18 @@ begin
                 female,
                 all_gender,
                 handicap_accessible,
-                capacity);
+                capacity); 
     end if;
 
 end //
+ 
 DELIMITER ;
-
+ 
 -- ADD RATING
-DROP PROCEDURE IF EXISTS add_rating
-DELIMITER //
+DROP PROCEDURE IF EXISTS add_rating 
+ 
+DELIMITER // 
+ 
 CREATE PROCEDURE add_rating
 (
 	bathroom_id int(11),
@@ -212,8 +217,9 @@ begin
 	end if;
     
 end //
+ 
 DELIMITER ;
-
+ 
 /*
 
 -- FIND CLOSEST BUILDINGS (lat, long, count)
