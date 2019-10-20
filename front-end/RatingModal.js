@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Button, StyleSheet, Text, View, TextInput } from "react-native";
 import Modal from "react-native-modal";
 import { Overlay } from "react-native-elements";
 import { Rating, AirbnbRating } from "react-native-ratings";
@@ -23,6 +23,7 @@ export default class RatingModal extends Component {
       result: rating
     });
   }
+  
 
   render() {
     return (
@@ -48,6 +49,11 @@ export default class RatingModal extends Component {
               reviewSize={20}
               style={styles.rating}
               onFinishRating={this.ratingCompleted}
+            />
+            <TextInput
+              style={{ height: '50%', borderColor: "gray", borderWidth: 1, margin: 16 }}
+              // onChangeText={text => onChangeText(text)}
+              // value={value}
             />
             <Button
               style={{}}

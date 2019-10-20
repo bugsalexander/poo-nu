@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  Button,
   View,
   SafeAreaView,
   Text,
   Alert,
 } from 'react-native';
 import Constants from 'expo-constants';
+import { Button } from 'react-native-elements';
 
 export default class GoButton extends Component {
   state = {
@@ -40,7 +40,7 @@ export default class GoButton extends Component {
         <SafeAreaView style={styles.container}>
           <View>
             <Button
-              title="GO!"
+              title="I gotta go."
               onPress={() => Alert.alert('pranked')}
             />
             <Text style = {styles.boldText}>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 0.15,
     marginTop: Constants.statusBarHeight,
-    marginHorizontal: 16,
+    marginHorizontal: 16
   },
   title: {
     textAlign: 'center',
