@@ -21,7 +21,7 @@ export function reformatBathroom(sql_bathroom) {
     capacity: sql_bathroom.bathroom_capacity,
     average_rating: 0,
     ratings: [],
-    distance: sql_bathroom.ft,
+    distance: Math.max(sql_bathroom.ft, 0),
     building_name: sql_bathroom.building_name,
   };
 }
