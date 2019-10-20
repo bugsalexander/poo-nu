@@ -11,7 +11,7 @@ export function gql_resolver(database) {
   return {
     Query: {
       getNearestBathrooms: (args) => getNearestBathrooms(database, args.lat, args.long, args.count),
-      getNearestBuildings: (args) => getNearestBuildings(database, args.lat, args.long, args.count),
+      getNearestBuildings: (args) => getNearestBuildings(args, args.lat, args.long, args.count),
       getBathroom: (id) => getBathroom(database, args.id)
     },
     Mutation: {
@@ -46,12 +46,8 @@ function getNearestBathrooms(database, latitude, longitude, count) {
 }
 
 function getNearestBuildings(database, latitude, longitude, count) {
-  console.log("latitude: " + latitude);
-  console.log(latitude);
-  console.log("longitude: " + longitude);
-  console.log(longitude);
-  console.log("count: " + count);
-  console.log(count);
+  console.log(args);
+  console.log(args.latitude);
 
   const query = ""
   + "select *, ROUND(((SQRT(POWER((building_latitude - "
