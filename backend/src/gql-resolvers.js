@@ -17,7 +17,7 @@ export function gql_resolver(database) {
       getBathroom: (bad, args) => getBathroom(database, args.bathroomId)
     },
     Mutation: {
-      addBathroom: (bad, args) => addBathroom(database, args.building, args.name, args.description, args.floor, args.male, args.female, args.all_gender, args.handicap_accessible, args.capacity),
+      addBathroom: (bad, args) => addBathroom(database, args.building_id, args.name, args.description, args.floor, args.male, args.female, args.all_gender, args.handicap_accessible, args.capacity),
       addRating: (bad, args) => addRating(database, args.bathroomId, args.ratingContent),
     }
   };
@@ -67,7 +67,7 @@ function getBathroom(database, bathroom_id) {
   console.log(bathroom_id);
 
   const query = ""
-  + "select bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, "
+  + "select bathroom_id, building_id, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, "
   + "bathroom_capacity, building_name from Bathroom join Building using (building_id) where bathroom_id = "
   + bathroom_id
   + ";";
@@ -79,20 +79,21 @@ function getBathroom(database, bathroom_id) {
 
 function addBathroom(database, building, name, description, floor, male, female, all_gender, handicap_accessible, capacity) {
 
+
   const query = ""
   + "call add_bathroom("
-  + building
-  + name
-  + description
-  + floor
-  + male
-  + female
-  + all_gender
-  + handicap_accessible
+  + building + ", "
+  + "\"" + name + "\"" + ", "
+  + "\"" + description + "\"" + ", "
+  + floor + ", "
+  + male + ", "
+  + female + ", "
+  + all_gender + ", "
+  + handicap_accessible + ", "
   + capacity
   + ");";
 
-  return queryDatabase(database, query, reformatBathroom);
+  return queryDatabase(database, query, () => undefined);
   
 }
 
@@ -105,7 +106,7 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
   + rating_value
   + ");";
 
-  return queryDatabase(database, query, reformatBathroomRating);
+  return queryDatabase(database, query, () => undefined);
 }
 
 /**
@@ -124,7 +125,6 @@ function queryDatabase(database, query, formatter) {
       console.log("----------------------------------------------------------------------------");
       const formatted = formatter(result);
       console.log(formatted);
-      console.log(formatted instanceof Array);
       console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
       resolve(formatter(result));
     });
