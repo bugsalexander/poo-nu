@@ -13,18 +13,21 @@ import { Rating, AirbnbRating } from "react-native-elements";
 import RatingModal from "../components/RatingModal";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
-import BathroomPanel from "../components/BathroomPanel"
+import BathroomPanel from "../components/BathroomPanel";
+import MapView from "react-native-maps";
+import InnerMap from "../components/InnerMap";
+import CommentPanel from "../components/CommentPanel";
 
 const list = [
   {
     commentText:
-      "Best poop of my life. I'm so grateful to have found this poop spot, and I hope that everyone has the opportunity to poop here one day.",
+      "Best experience of my life. I'm so grateful to have found this bathroom, and I hope that everyone has the opportunity to experience what I experienced today.",
     rating: 5
   },
-  { commentText: "Horrible poop.", rating: 1 },
+  { commentText: "Horrible bathroom.", rating: 1 },
   {
     commentText:
-      "Mediocre poop. Quality of the poop was solid, but location is less than ideal.",
+      "Mediocre bathroom. Very clean, but location is less than ideal.",
     rating: 2.5
   }
 ];
@@ -66,20 +69,20 @@ export default class BathroomScreen extends Component {
   // this.state.bathroomId
   // this.state.ratingContent
 
-
-
   addBathroomRating = () => {
-  const query = ` 
+    const query = ` 
               mutation {
-                addRating(bathroomId: ${1}, ratingContent: ${""}, ratingValue: ${this.state.userRating}) {
+                addRating(bathroomId: ${1}, ratingContent: ${""}, ratingValue: ${
+      this.state.userRating
+    }) {
                 }
               }`;
-      request("http://35.199.57.159", query)
-                .then((result) => {
-                  return result.data;
-                })
-                .catch(console.error); 
-    }
+    request("http://35.199.57.159", query)
+      .then(result => {
+        return result.data;
+      })
+      .catch(console.error);
+  };
 
   render() {
     return (
@@ -105,14 +108,14 @@ export default class BathroomScreen extends Component {
           </View>
           <View style={styles.rating}>
             <View>
-              <Rating imageSize={20} readonly startingValue={4.5} />
+              <Rating imageSize={20} readonly startingValue={this.props.rating} />
             </View>
 
             <Text
               style={{ paddingLeft: 12, paddingTop: 2.5 }}
               numberOfLines={4}
             >
-              {this.state.numReviews} Reviews
+              {this.props.numRatings} Reviews
             </Text>
           </View>
           <View
@@ -176,17 +179,30 @@ export default class BathroomScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.line} />
-          {/* <View>
+          <View style={styles.map}>
+            <InnerMap latitude={this.props.latitude} longitude={this.props.longitude} lastPos={this.state.lastPos}></InnerMap>
+          </View>
+          
+          <View style={styles.comments}>
+            
+            <Text
+              style={{ fontSize: 18, fontWeight: "bold", marginBottom: 12 }}
+            >
+              Reviews:
+            </Text>
             {list.map((elem, i) => {
               return (
-                <CommentPanel
-                  key={i}
-                  commentText={elem.commentText}
-                  rating={elem.rating}
-                />
+                <View>
+                  <View style={styles.commentLine} />
+                  <CommentPanel
+                    key={i}
+                    commentText={elem.commentText}
+                    rating={elem.rating}
+                  />
+                </View>
               );
             })}
-          </View> */}
+          </View>
         </ScrollView>
       </View>
     );
@@ -229,5 +245,18 @@ const styles = StyleSheet.create({
   },
   specs: {
     marginTop: 6
+  },
+  map: {
+    width: "100%",
+    height: 80
+  },
+  comments: {
+    marginTop: 150
+  },
+  commentLine: {
+    marginTop: 0,
+    marginBottom: 16,
+    borderBottomColor: "#EBEBEB",
+    borderBottomWidth: 1
   }
 });

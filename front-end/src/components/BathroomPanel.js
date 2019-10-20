@@ -26,7 +26,11 @@ export default class BathroomPanel extends Component {
         onPress={() => {
           Actions.info({
             lastPos: this.props.lastPos,
-            bathroomName: this.props.bathroomName
+            bathroomName: this.props.bathroomName,
+            rating: this.props.rating,
+            numRatings: this.props.numRatings,
+            latitude: this.props.latitude,
+            longitude: this.props.longitude
           });
         }}
       >
@@ -36,7 +40,7 @@ export default class BathroomPanel extends Component {
             style={{ paddingLeft: 4, marginTop: 4, marginBottom: 4 }}
             imageSize={20}
             readonly
-            startingValue={3}
+            startingValue={this.props.rating}
           />
           <View style={{ paddingLeft: 6, flexDirection: "row", flex: 1 }}>
             <Text style={{ flex: 0.4 }}>{this.props.bathroomAddress}</Text>

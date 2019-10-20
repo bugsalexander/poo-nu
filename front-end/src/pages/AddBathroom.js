@@ -5,15 +5,16 @@ import CheckBox from "react-native-check-box";
 import { Button, Input } from "react-native-elements";
 
 const list = [
-  { buildingName: "West Village A", buildingID: 1 },
-  { buildingName: "West Village B", buildingID: 2 },
-  { buildingName: "West Village C", buildingID: 3 },
+  { buildingName: "Churchill Hall", buildingID: 1 },
+  { buildingName: "West Village A", buildingID: 2 },
+  { buildingName: "West Village B", buildingID: 3 },
   { buildingName: "West Village D", buildingID: 4 },
   { buildingName: "West Village E", buildingID: 5 },
   { buildingName: "West Village F", buildingID: 6 },
   { buildingName: "West Village G", buildingID: 7 },
   { buildingName: "West Village H", buildingID: 8 }
 ];
+
 
 export default class AddBathroom extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ export default class AddBathroom extends Component {
           <RNPickerSelect
             onValueChange={value => console.log(value)}
             items={list.map((elem, i) => {
-              return { label: elem.buildingName, value: elem.buildingName };
+              return { label: elem.buildingID, value: i };
             })}
           />
         </View>

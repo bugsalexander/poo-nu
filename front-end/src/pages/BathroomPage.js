@@ -5,120 +5,94 @@ import BathroomPanel from '../components/BathroomPanel';
 import GoButton from '../components/GoButton';
 import {request} from 'graphql-request';
 import axios from "axios";
+import { Router, Scene, Actions } from "react-native-router-flux";
+
 const list = [
   {
     bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
+    bathroomAddress: "440 Huntington Ave.",
+    genderText: "Male, Female",
+    rating: 3.5,
+    numRatings: 22,
+    latitude: 42.338572,
+    longitude: -71.092355
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
+    bathroomName: "West Village H: Floor 2",
+    bathroomAddress: "440 Huntington Ave.",
     genderText: "All-Gender",
-    handicapText: "Handicap"
+    handicapText: "Handicap",
+    rating: 4,
+    numRatings: 14,
+    latitude: 42.338572,
+    longitude: -71.092355
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
+    bathroomName: "West Village H: Floor 3",
+    bathroomAddress: "440 Huntington Ave.",
     genderText: "All-Gender",
-    handicapText: "Handicap"
+    handicapText: "Handicap",
+    rating: 4.5,
+    numRatings: 10,
+    latitude: 42.338572,
+    longitude: -71.092355
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
+    bathroomName: "West Village G: Floor 1",
+    bathroomAddress: "450 Parker Street",
+    genderText: "Male, Female",
+    rating: 4,
+    numRatings: 4,
+    latitude: 42.338275,
+    longitude: -71.091984
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
+    bathroomName: "West Village F: Floor B",
+    bathroomAddress: "40A Leon Street",
+    genderText: "Male, Female",
+    handicapText: "Handicap",
+    rating: 3.5,
+    numRatings: 8,
+    latitude: 42.337360,
+    longitude: -71.091593
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
+    bathroomName: "Behrakis Center: Floor 4",
+    bathroomAddress: "30 Leon Street",
     genderText: "All-Gender",
-    handicapText: "Handicap"
+    handicapText: "Handicap",
+    rating: 5,
+    numRatings: 51,
+    latitude: 42.336712,
+    longitude: -71.091654
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
+    bathroomName: "Marino Recreation Center: Floor 1",
+    bathroomAddress: "259 Huntington Ave.",
+    genderText: "Male, Female",
+    rating: 1.5,
+    numRatings: 27,
+    latitude: 42.340274,
+    longitude: -71.090268
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
+    bathroomName: "Stetson West: Floor 1",
+    bathroomAddress: "106 St. Stephen St.",
     genderText: "All-Gender",
-    handicapText: "Handicap"
+    rating: 0.5,
+    numRatings: 19,
+    latitude: 42.340948,
+    longitude: -71.090463
   },
   {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
-  },
-  {
-    bathroomName: "West Village H: Floor 1",
-    bathroomAddress: "291 St. Botolph St.",
-    genderText: "All-Gender",
-    handicapText: "Handicap"
+    bathroomName: "Speare Hall: Floor 1",
+    bathroomAddress: "4 Speare Pl.",
+    genderText: "Male, Female",
+    handicapText: "Handicap",
+    rating: 4,
+    numRatings: 11,
+    latitude: 42.340704,
+    longitude: -71.089698
   }
 ];
 
@@ -139,6 +113,7 @@ export default class BathroomPage extends Component {
             (error) => alert(error.message),
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
         );
+        
         this.watchID = navigator.geolocation.watchPosition((position) => {
             const lastPosition = JSON.stringify(position);
             this.setState({ lastPosition });
@@ -195,6 +170,10 @@ export default class BathroomPage extends Component {
                   bathroomAddress={elem.bathroomAddress}
                   genderText={elem.genderText}
                   handicapText={elem.handicapText}
+                  rating={elem.rating}
+                  numRatings={elem.numRatings}
+                  latitude={elem.latitude}
+                  longitude={elem.longitude}
                 />
                 <View style={styles.line} />
               </View>
@@ -210,7 +189,7 @@ export default class BathroomPage extends Component {
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
     padding: 30,
     margin: 2,
