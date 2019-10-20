@@ -60,7 +60,7 @@ const bathroom_t = gql`
     handicap_accessible: Int!
     capacity: Int!
     average_rating: Float
-    ratings: [BathroomRating!]!
+    ratings: [BathroomRating!]
     distance: Int
   }
 `;
