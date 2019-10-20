@@ -115,14 +115,18 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
  * @param {*} formatter a formatter function
  */
 function queryDatabase(database, query, formatter) {
-    return database.query(query, (err, result, fields) => {
-      if (err) throw err;
+  return new Promise((resolve, reject) => {
+    database.query(query, (err, result, fields) => {
+      if (err) {
+        reject(err);
+      }
       console.log(result);
       console.log("----------------------------------------------------------------------------");
       const formatted = formatter(result);
       console.log(formatted);
       console.log(formatted instanceof Array);
       console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-      return formatter(result);
+      resolve(formatter(result));
     });
+  });
 }
