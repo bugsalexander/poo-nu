@@ -38,7 +38,8 @@ export default class BathroomScreen extends Component {
   submit(rating) {
     console.log(rating)
     this.setState({
-      isReviewVisible: false
+      isReviewVisible: false,
+      isSubmitted: true
     });
   }
 
