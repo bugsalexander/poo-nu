@@ -15,6 +15,7 @@ const query = gql`
     getNearestBathrooms(lat: Float!, long: Float!, count: Int!): [Bathroom!]!
     getNearestBuildings(lat: Float!, long: Float!, count: Int!): [Building!]!
     getBathroom(bathroomId: Int!): Bathroom!
+    getAllBuildings(count: Int!): [Building!]!
   }
 `;
 

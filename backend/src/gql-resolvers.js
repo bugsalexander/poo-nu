@@ -14,7 +14,8 @@ export function gql_resolver(database) {
     Query: {
       getNearestBathrooms: (bad, args) => getNearestBathrooms(database, args.lat, args.long, args.count),
       getNearestBuildings: (bad, args) => getNearestBuildings(database, args.lat, args.long, args.count),
-      getBathroom: (bad, args) => getBathroom(database, args.bathroomId)
+      getBathroom: (bad, args) => getBathroom(database, args.bathroomId),
+      getAllBuildings: (bad, args) => getAllBuildings(database, args.count)
     },
     Mutation: {
       addBathroom: (bad, args) => addBathroom(database, args.building_id, args.name, args.description, args.floor, args.male, args.female, args.all_gender, args.handicap_accessible, args.capacity),
@@ -73,6 +74,13 @@ function getBathroom(database, bathroom_id) {
   + ";";
   
   return queryDatabase(database, query, reformatBathroom);
+}
+
+function getAllBuildings(database, count) {
+
+  const query = "select * from Building limit " + count + ";";
+
+  return queryDatabase(database, query, reformatBuildings);
 }
 
 // mutation functions. mutate the database.
