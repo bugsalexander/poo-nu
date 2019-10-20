@@ -16,11 +16,11 @@ export default class BathroomPanel extends Component {
     }
 
     render() {
-        const {navigate} = this.props.navigation;
         return (
         <View style = {{alignItems: 'center', width: '100%'}} >
             <Text onPress ={() => {Actions.info({bathroomName: this.props.bathroomName})}} style = {styles.titleText}> {this.props.bathroomName}</Text>
             <Text>{this.props.bathroomAddress}</Text>
+            <View style={styles.line} />
         </View>
         );
     }
@@ -28,11 +28,17 @@ export default class BathroomPanel extends Component {
 
 const styles = StyleSheet.create({
     baseText: {
-        fontFamily: 'Cochin',
+        fontFamily: 'Avenir',
     },
     titleText: {
         fontSize: 20,
         fontWeight: 'bold',
     },
+    line: {
+        marginTop: 12,
+        marginBottom: 12,
+        borderBottomColor: "#EBEBEB",
+        borderBottomWidth: 1
+      }
 });
 
