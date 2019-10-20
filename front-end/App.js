@@ -1,10 +1,32 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import BathroomPage from './src/pages/BathroomPage';
+
+const list = [ 
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
+  {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'}]
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <BathroomPage bathrooms = {list}/>
     </View>
   );
 }
@@ -14,6 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
 });
