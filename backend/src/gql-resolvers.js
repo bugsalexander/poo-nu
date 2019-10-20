@@ -10,14 +10,13 @@
 export function gql_resolver(database) {
   return {
     Query: {
-      getNearestBathrooms: (lat, long, count) => getNearestBathrooms(database, lat, long, count),
-      getNearestBuildings: (lat, long, count) => getNearestBuildings(database, lat, long, count),
-      getBathroom: (id) => getBathroom(database, id)
+      getNearestBathrooms: (args) => getNearestBathrooms(database, args.lat, args.long, args.count),
+      getNearestBuildings: (args) => getNearestBuildings(database, args.lat, args.long, args.count),
+      getBathroom: (id) => getBathroom(database, args.id)
     },
     Mutation: {
-      addBathroom: (building, name, description, floor, male, female, all_gender, handicap_accessible, capacity) => 
-      addBathroom(database, building, name, description, floor, male, female, all_gender, handicap_accessible, capacity),
-      addRating: (bathroomId, ratingContent) => addRating(database, bathroomId, ratingContent),
+      addBathroom: (args) => addBathroom(database, args.building, args.name, args.description, args.floor, args.male, args.female, args.all_gender, args.handicap_accessible, args.capacity),
+      addRating: (args) => addRating(database, args.bathroomId, args.ratingContent),
     }
   };
 }
