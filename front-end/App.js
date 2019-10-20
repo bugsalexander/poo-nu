@@ -27,13 +27,15 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { AppRegistry} from 'react-native';
 import Routes from './Routes';
+import InnerMap from './src/components/InnerMap';
 
 function App() {
   return (
-    <Routes />
+   // <Routes /> 
+   <InnerMap/>
   );
 } 
 
 
 export default App
-AppRegistry.registerComponent('App', () => App)
+//AppRegistry.registerComponent('App', () => App)

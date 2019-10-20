@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
 
-import {SafeAreaView, Text, Button, View, StyleSheet, ScrollView, SectionList } from 'react-native';
+import {SafeAreaView, ActivityIndicator, Text, Button, View, StyleSheet, ScrollView, SectionList } from 'react-native';
 import BathroomPanel from '../components/BathroomPanel';
 import GoButton from '../components/GoButton';
-
-import { View, Text, ActivityIndicator } from "react-native";
-
-import { ApolloProvider, Query } from "react-apollo";
-import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
 
 const list = [ 
     {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
@@ -35,8 +29,8 @@ const list = [
 export default class BathroomPage extends Component {
     state = {
         initialPosition: 'unknown',
-        lastPosition: 'unknown',
-        query: null
+        lastPosition: 'unknown', 
+        query: null   
     }
 
     watchID = null;
