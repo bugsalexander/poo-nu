@@ -125,7 +125,7 @@ INSERT INTO Bathroom VALUES
 
 DROP TABLE IF EXISTS Rating;
 CREATE TABLE Rating (
-	rating_id int(11) PRIMARY KEY,
+	rating_id int(11) PRIMARY KEY AUTO_INCREMENT,
     bathroom_id int(11),
     rating_content varchar(255) NOT NULL,
     rating_value int(4) NOT NULL,
@@ -167,7 +167,8 @@ begin
     -- insert into Bathroom table
     else
         INSERT INTO Bathroom VALUES
-            (   building_id,
+            (   0,
+				building_id,
                 name,
                 description,
                 floor,
@@ -179,12 +180,41 @@ begin
     end if;
 
 end //
-
-
 DELIMITER ;
 
+-- ADD RATING
+DROP PROCEDURE IF EXISTS add_rating
+DELIMITER //
+CREATE PROCEDURE add_rating
+(
+	bathroom_id int(11),
+    rating_content varchar(255),
+    rating_value int(11)
+)
+begin
+	
+	-- check if bathroom exists
+    if bathroom_id not in (select b.bathroom_id from Bathroom b) then
+		signal sqlstate 'HY000' set message_text = 'Bathroom not found!';
+        
+        
+	elseif (rating_value > 10) or (rating_value < 0) then
+		signal sqlstate 'HY000' set message_text = 'Invalid Rating!';
+	
+    -- insert into Rating table
+    else
+		INSERT INTO Rating VALUES
+        (	0,
+			bathroom_id,
+            rating_content,
+            rating_value
+		);
+	end if;
+    
+end //
+DELIMITER ;
 
-
+/*
 
 -- FIND CLOSEST BUILDINGS (lat, long, count)
 select *,
@@ -193,8 +223,8 @@ from Building
 order by ft asc
 limit 20; -- count
 
--- FIND CLOSEST BATHROOMS (lat, long, count)
-select building_name, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
+-- FIND CLOSEST BATHROOMS (lat, long, count) RETURNS (building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, distance)
+select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
 ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft	-- latitude, longitude
 from Building join Bathroom using (building_id)
 order by ft asc
@@ -215,22 +245,27 @@ from Building join Bathroom using (building_id)
 having ft < 1200 -- distance
 order by ft asc;
 
--- FIND BATHROOMS IN BUILDING (building_id)
-select *
+-- FIND BATHROOMS IN BUILDING (building_id) RETURNS (bathroom_id, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity)
+select bathroom_id, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity
 from Building join Bathroom using (building_id)
 where building_id = 1; -- building_id
 
+-- GET AVERAGE BATHROOM RATING (bathroom_id) RETURNS (avg_rating)
+select ROUND(avg(rating_value), 2)
+from Bathroom join Rating using (bathroom_id)
+where bathroom_id = 3
+group by bathroom_id;
+
+ call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
+
+select * from Bathroom;
+
+call add_rating(6, 'Fantastic Poop', 6);
+
+select * from Rating;
 
 
-
-
-
-
-
-
-
-
-
+*/
 
 
 
