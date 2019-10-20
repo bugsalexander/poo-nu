@@ -14,6 +14,8 @@ Initially, we did lots of planning. We thought about who would be using our app,
 
 Step two was splitting up the work, and figuring out what frameworks and APIs we were going to use in our project. We divided with Alex and Dillon on the backend, and Stanley and Jake on the frontend. Alex had recently heard about the greatness of GraphQL through a friend and wanted to try it out for the API, so we went with that for the backend, in parallel with Apollo server. Dillon had just taken a class on SQL, and decided to take it for a spin with the database. Stanley decided he wanted to try his hand at React-Native, and so he and Jake decided to use that for the frontend.
 
+<img src="./images/bathroompage.jpeg" alt="A bathroom page"/>
+
 ## Challenges we ran into
 Dillon and Alex had a lot of bug fixes relating to discrepancies between the GraphQL schema and the MySQL database work, while Jake and Stanley spent a significant amount of time trying to figure out how to route the application's front-end to different pages and develop a good flow for the assignment. When fusing our React-Native frontend and Node / GraphQL backend, we encountered a variety of issues regarding the format of the GraphQL data as well as with asynchronous functions and promises that proved to be more nuanced and complex than initially thought. 
 
