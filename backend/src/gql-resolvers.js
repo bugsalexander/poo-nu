@@ -32,24 +32,20 @@ export function gql_resolver(database) {
 export function decorateCheckConnection(database, toBeDecorated) {
   
   // return a new function.
-  return function() {
-
-    // save the inner arguments (works properly, tested)
-    const innerArgs = arguments;
+  return function(... innerArgs) {
 
     // attempt to connect to the database.
-    database.connect(function(err) {
+    return database.connect(function(err) {
       if (err) {
         console.log(err);
         return undefined;
       } else {
 
         // tack on the database to the front of the inner function's arguments.
-        const args = Array.prototype.slice.call(innerArgs); // Make real array from arguments
-        args.unshift(database);
+        innerArgs.unshift(database);
 
         // return the decorated function, curried with the database at the front of the arguments.
-        return toBeDecorated.apply(this, args);
+        return toBeDecorated.apply(this, innerArgs);
       }
     });
   };
