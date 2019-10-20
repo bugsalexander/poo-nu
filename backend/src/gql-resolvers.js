@@ -13,8 +13,8 @@ export function gql_resolver(database) {
   return {
     Query: {
       getNearestBathrooms: (bad, args) => getNearestBathrooms(database, args.lat, args.long, args.count),
-      getNearestBuildings: (bad, args) => getNearestBuildings(args, args.lat, args.long, args.count),
-      getBathroom: (bad, args) => getBathroom(database, args.id)
+      getNearestBuildings: (bad, args) => getNearestBuildings(database, args.lat, args.long, args.count),
+      getBathroom: (bad, args) => getBathroom(database, args.bathroomId)
     },
     Mutation: {
       addBathroom: (bad, args) => addBathroom(database, args.building, args.name, args.description, args.floor, args.male, args.female, args.all_gender, args.handicap_accessible, args.capacity),
@@ -40,8 +40,8 @@ function getNearestBathrooms(database, latitude, longitude, count) {
     + latitude
     + "), 2) + POWER((building_longitude - "
     + longitude 
-    + "), 2)) * 10000 / 90) * 3280.4), 0) as ft from Building join Bathroom using (building_id) order by ft asc "
-    + limit
+    + "), 2)) * 10000 / 90) * 3280.4), 0) as ft from Building join Bathroom using (building_id) order by ft asc limit "
+    + count
     + ";";
 
   return queryDatabase(database, query, reformatBathrooms);
@@ -63,6 +63,8 @@ function getNearestBuildings(database, latitude, longitude, count) {
 }
 
 function getBathroom(database, bathroom_id) {
+
+  console.log(bathroom_id);
 
   const query = ""
   + "select bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, "
@@ -120,6 +122,7 @@ function queryDatabase(database, query, formatter) {
     } else {
       return database.query(query, (err, result, fields) => {
         if (err) throw err;
+        console.log(result);
         return formatter(result);
       });
     }
