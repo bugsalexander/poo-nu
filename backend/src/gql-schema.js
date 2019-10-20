@@ -10,7 +10,7 @@ import { gql } from 'apollo-server';
   * @param getBathrooms list of bathrooms
   * @param getBuildings list of buildings
   */
-const request = gql`
+const query = gql`
   type Query {
     getNearestBathrooms(lat: Float!, long: Float!, count: Int!): [Bathroom!]!
     getNearestBuildings(lat: Float!, long: Float!, count: Int!): [Building!]!
@@ -90,7 +90,7 @@ const building_t = gql`
 
 // export the type definitions 
 export const typeDefs = [
-  request,
+  query,
   mutation,
   bathroom_t,
   bathroom_rating_t,
