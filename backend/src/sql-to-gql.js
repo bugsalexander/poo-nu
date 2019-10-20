@@ -20,7 +20,9 @@ export function reformatBathroom(sql_bathroom) {
     handicap_accessible: sql_bathroom.bathroom_handicap_accessible,
     capacity: sql_bathroom.bathroom_capacity,
     average_rating: 0,
-    ratings: []
+    ratings: [],
+    distance: sql_bathroom.ft,
+    building_name: sql_bathroom.building_name,
   };
 }
 

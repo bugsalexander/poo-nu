@@ -33,6 +33,7 @@ const mutation = gql`
  * A Bathroom is a bathroom.
  * @param bathroom_id a unique id
  * @param building_id the id of the building this bathroom is in
+ * @param building_name the name of the buidling this bathroom is in
  * @param name the name of the bathroom
  * @param description the description 
  * @param floor the floor number this bathroom is on
@@ -43,11 +44,13 @@ const mutation = gql`
  * @param capacity the capacity of the bathroom
  * @param average_rating is nullable, as we could sometimes have no ratings.
  * @param ratings the ratings of this bathroom. non-nullable, but may have the empty list.
+ * @param distance the distance away from this bathroom
  */
 const bathroom_t = gql`
   type Bathroom {
     bathroom_id: Int!
     building_id: Int!
+    building_name: String!
     name: String!
     description: String!
     floor: Int!
@@ -58,6 +61,7 @@ const bathroom_t = gql`
     capacity: Int!
     average_rating: Float
     ratings: [BathroomRating!]!
+    distance: Int
   }
 `;
 
