@@ -28,7 +28,11 @@ export function reformatBathroom(sql_bathroom) {
  * @param {*} sql_bathrooms the list of sql formatted bathrooms to reformat
  */
 export function reformatBathrooms(sql_bathrooms) {
-  return sql_bathrooms.map((single) => reformatBathroom(single));
+  const result = [];
+  for (let i = 0; i < sql_bathrooms.length; i += 1) {
+    result.push(reformatBathroom(sql_bathrooms[i]));
+  }
+  return result;
 }
 
 /**
@@ -45,7 +49,11 @@ export function reformatBuildings(sql_buildings) {
     };
   }
 
-  return sql_buildings.map((single) => reformatBuilding(single));
+  const result = [];
+  for (let i = 0; i < sql_buildings.length; i += 1) {
+    result.push(reformatBuilding(sql_buildings[i]));
+  }
+  return result;
 }
 
 /**
