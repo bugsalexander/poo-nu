@@ -7,6 +7,7 @@
  * @param {*} sql_bathroom the sql formatted bathroom.
  */
 export function reformatBathroom(sql_bathroom) {
+  console.log(sql_bathroom);
   return {
     bathroom_id: sql_bathroom.bathroom_id,
     building_id: sql_bathroom.building_id,

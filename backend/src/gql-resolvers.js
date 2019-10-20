@@ -35,7 +35,7 @@ export function gql_resolver(database) {
 function getNearestBathrooms(database, latitude, longitude, count) {
 
   const query = ""
-    + "select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, "
+    + "select bathroom_id, building_id, building_name, bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, "
     + "bathroom_handicap_accessible, bathroom_capacity, ROUND(((SQRT(POWER((building_latitude - "
     + latitude
     + "), 2) + POWER((building_longitude - "

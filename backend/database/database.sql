@@ -148,7 +148,7 @@ DROP PROCEDURE IF EXISTS add_bathroom
 DELIMITER //
 CREATE PROCEDURE add_bathroom
 (
-    building_name varchar(100),
+    building_id int(11),
     name varchar(100),
     description varchar(255),
     floor int(11),
@@ -161,14 +161,14 @@ CREATE PROCEDURE add_bathroom
 begin
 
     -- check if building exists
-    if building_name not in (select b.building_name from Building b) then
+    if building_id not in (select b.building_id from Building b) then
         signal sqlstate 'HY000' set message_text = 'Building not found!';
 
     -- insert into Bathroom table
     else
         INSERT INTO Bathroom VALUES
             (   0,
-				(select building_id from Building b where b.building_name = building_name),
+				building_id,
                 name,
                 description,
                 floor,
@@ -279,7 +279,9 @@ call add_rating(6, 'Fantastic Poop', 6);
 select * from Rating;
 
 
-*/
+
 
 -- GET ALL BUILDINGS () RETURNS (building_name)
 select building_name from Building;
+call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
+*/
