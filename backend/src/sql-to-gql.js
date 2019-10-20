@@ -28,13 +28,22 @@ export function reformatBathroom(sql_bathroom) {
 }
 
 /**
- * 
+ * Reformats a list of bathroom ratings.
  * @param {*} sql_ratings the list of sql ratings
  */
 export function reformatBathroomRatings(sql_ratings) {
+  function reformatSingleRating(rat) {
+    // todo get rid of placeholder values
+    return {
+      bathroom_id: 0,
+      rating_content: "hello",
+      rating_value: 10,
+    }
+  }
+
   const result = [];
   for (let i = 0; i < sql_ratings.length; i += 1) {
-    
+    result.push(reformatSingleRating(sql_ratings[i]));
   }
   return result;
 }
