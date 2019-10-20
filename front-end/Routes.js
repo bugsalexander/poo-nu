@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Scene } from "react-native-router-flux";
+import { Router, Scene, Actions } from "react-native-router-flux";
 import BathroomScreen from "./src/pages/BathroomScreen.js";
 import BathroomPage from "./src/pages/BathroomPage";
 import AddBathroom from "./src/pages/AddBathroom";
@@ -12,7 +12,7 @@ const Routes = () => (
     titleStyle={{ width: "100%" }}
   >
     <Scene key="root">
-      <Scene key="home" component={BathroomPage} title="Home" initial={true}/>
+      <Scene key="home" component={BathroomPage} title="Home" onRight={() => {Actions.add()}} rightTitle="add" initial={true}/>
       <Scene key="info" component={BathroomScreen} title="Bathroom Info" />
       <Scene key="add" component={AddBathroom} title="New Bathroom" />
     </Scene>
