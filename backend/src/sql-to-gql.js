@@ -28,6 +28,18 @@ export function reformatBathroom(sql_bathroom) {
 }
 
 /**
+ * 
+ * @param {*} sql_ratings the list of sql ratings
+ */
+export function reformatBathroomRatings(sql_ratings) {
+  const result = [];
+  for (let i = 0; i < sql_ratings.length; i += 1) {
+    
+  }
+  return result;
+}
+
+/**
  * Reformats a list of sql formatted bathrooms
  * @param {*} sql_bathrooms the list of sql formatted bathrooms to reformat
  */
