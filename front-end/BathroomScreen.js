@@ -15,6 +15,7 @@ export default class BathroomScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // bathroom: props.bathroom,
       titleText: props.bathroomName,
       numReviews: 51,
       count: 0,
@@ -29,10 +30,6 @@ export default class BathroomScreen extends Component {
     this.setState({
       isReviewVisible: !this.state.isReviewVisible
     });
-  };
-
-  onBackPress = () => {
-    
   };
 
   submit(rating) {

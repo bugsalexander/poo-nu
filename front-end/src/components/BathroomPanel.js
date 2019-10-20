@@ -9,9 +9,8 @@ export default class BathroomPanel extends Component {
         title: 'Pick a Bathroom'
     };
 
-
     // TODO: produce bathroom images dependent on type of bathroom
-    // produces a bathroom image depending on the type of bathroom.
+    // produces a bathroom image depending on the type of bathroom to be displayed.
     determineBathroomType(b) {
 
     }
