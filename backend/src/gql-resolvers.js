@@ -66,17 +66,17 @@ export function decorateCheckConnection(database, toBeDecorated) {
  */
 function getNearestBathrooms(database, latitude, longitude, count) {
 
-  return database.query(""
+  const query = ""
   + "SELECT *, ROUND(((SQRT(POWER((building_latitude - " 
   + latitude 
   + "), 2) + POWER((building_longitude - " 
   + longitude 
   + "), 2)) * 10000 / 90) * 3280.4), 0) as ft FROM Building order by ft asc limit " 
   + count 
-  + ";", 
-    function (err, result, fields) {
+  + ";"
+
+  return database.query(query, (err, result, fields) => {
     if (err) throw err;
-    console.log(result);
     return reformatBathroomList(result);
   });
 }
