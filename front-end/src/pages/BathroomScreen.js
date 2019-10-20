@@ -71,7 +71,7 @@ export default class BathroomScreen extends Component {
   addBathroomRating = () => {
   const query = ` 
               mutation {
-                addRating(bathroomId: ${1}, ratingContent: ${}, ratingValue: ${this.state.userRating}) {
+                addRating(bathroomId: ${1}, ratingContent: ${""}, ratingValue: ${this.state.userRating}) {
                 }
               }`;
       request("http://35.199.57.159", query)
