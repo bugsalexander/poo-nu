@@ -3,7 +3,7 @@
  * This file contains the GraphQL resolver.
  */
 
-import { reformatBathroom, reformatBathrooms, reformatBuildings, reformatBathroomRating } from "./sql-to-gql";
+import { reformatBathroom, reformatBathrooms, reformatBuildings, reformatBathroomRatings } from "./sql-to-gql";
  
 /**
  * Produces the resolver object for GraphQL
@@ -72,8 +72,19 @@ function getBathroom(database, bathroom_id) {
   + "bathroom_capacity, building_name from Bathroom join Building using (building_id) where bathroom_id = "
   + bathroom_id
   + ";";
+
+  const ratingQuery = "select bathroom_id, bathroom_name, rating_content, rating_value from Bathroom join"
+  + " Building using (building_id) left join Rating using (bathroom_id) where bathroom_id = "
+  + bathroom_id
+  + ";";
   
-  return queryDatabase(database, query, reformatBathroom);
+  const bathroomData = queryDatabase(database, query, reformatBathroom);
+  const ratingData = queryDatabase(database, ratingQuery, reformatBathroomRatings);
+
+  return Promise.all([bathroomData, ratingData]).then((results) => {
+    results[0].ratings = results[1];
+    return results[0];
+  });
 }
 
 function getAllBuildings(database, count) {

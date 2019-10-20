@@ -33,11 +33,10 @@ export function reformatBathroom(sql_bathroom) {
  */
 export function reformatBathroomRatings(sql_ratings) {
   function reformatSingleRating(rat) {
-    // todo get rid of placeholder values
     return {
-      bathroom_id: 0,
-      rating_content: "hello",
-      rating_value: 10,
+      bathroom_id: rat.bathroom_id,
+      rating_content: rat.rating_content,
+      rating_value: rat.rating_value,
     }
   }
 

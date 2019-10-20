@@ -237,13 +237,17 @@ order by ft asc
 limit 5; -- count
 
 -- FIND CLOSEST BATHROOMS W AVG RATING (lat, long, count) RETURNS (building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, distance, avg_rating)
+*/
 select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity,
-ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft, -- latitude, longitude
+ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft,
 avg(rating_value)
 from Building join Bathroom using (building_id) left join Rating using (bathroom_id)
 group by building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, ft
 order by ft asc
-limit 100; -- count
+limit 100;
+
+select building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, ROUND(((SQRT(POWER((building_latitude - 42.339475), 2) + POWER((building_longitude - -71.087224), 2)) * 10000 / 90) * 3280.4), 0) as ft, avg(rating_value) from Building join Bathroom using (building_id) left join Rating using (bathroom_id) group by building_name, bathroom_name, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, ft order by ft asc limit 100;
+/*
 
 -- FIND BUILDINGS WITHIN (lat, long, distance)
 select *,
@@ -269,13 +273,24 @@ select ROUND(avg(rating_value), 2)
 from Bathroom join Rating using (bathroom_id)
 where bathroom_id = 3
 group by bathroom_id;
+*/
+
+
+/*
 
 -- GET BATHROOM (bathroom_id) RETURNS (bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, building_name)
-select bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, building_name
-from Bathroom join Building using (building_id)
+select bathroom_name, bathroom_description, bathroom_floor, bathroom_male, bathroom_female, bathroom_all_gender, bathroom_handicap_accessible, bathroom_capacity, building_name, rating_content, rating_value
+from Bathroom join Building using (building_id) left join Rating using (bathroom_id)
 where bathroom_id = 1;
+*/
+-- GET RATINGS
+select bathroom_id, bathroom_name, rating_content, rating_value from Bathroom join Building using (building_id) left join Rating using (bathroom_id) where bathroom_id = 1;
 
+call add_rating(1, 'Fantastic Poop', 3);
 
+select * from Rating;
+
+/*
  call add_bathroom(84, 'New Bathroom!', 'Quaint little corner nook with a view.', 4, 0, 1, 0, 1, 3);
 
 select * from Bathroom;
