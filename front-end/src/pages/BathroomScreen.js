@@ -14,6 +14,8 @@ import RatingModal from "../components/RatingModal";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import BathroomPanel from "../components/BathroomPanel"
+import {request} from 'graphql-request';
+
 
 const list = [
   {
@@ -43,6 +45,7 @@ export default class BathroomScreen extends Component {
     };
     this.onPress = this.onPress.bind(this);
     this.submit = this.submit.bind(this);
+    this.addBathroomRating = this.addBathroomRating.bind(this);
   }
 
   onPress = () => {
@@ -60,18 +63,14 @@ export default class BathroomScreen extends Component {
       hasReviewed: true
     }); 
 
-    // make submit rating request
+    this.addBathroomRating();
   }
 
-  // this.state.bathroomId
-  // this.state.ratingContent
-
-
-
   addBathroomRating = () => {
-  const query = ` 
+    console.log("Adding bathroom rating..");
+   const query = ` 
              mutation {
-                addRating(bathroomId: ${1}, ratingContent: ${"Nice!"}, ratingValue: ${this.state.userRating}) {
+                addRating(bathroomId: ${0}, ratingContent: ${"Nice!"}, ratingValue: ${this.state.userRating}) {
                 }
               }`;
       request("http://35.199.57.159", query).catch(console.error); 
@@ -177,7 +176,7 @@ export default class BathroomScreen extends Component {
               return (
                 <CommentPanel
                   key={i}
-                  commentText={elem.commentText}
+                  commentText={elem.commentText} 
                   rating={elem.rating}
                 />
               );

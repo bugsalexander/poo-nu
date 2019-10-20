@@ -11,37 +11,39 @@ import { Actions } from 'react-native-router-flux';
 import { Button } from 'react-native-elements';
 import axios from 'axios';
 
+import {request} from 'graphql-request';
+
+getNearestBathroom = () => {
+  const query = ` 
+              query {
+                  getNearestBathrooms(lat: 42, long: -71, count: 1) {
+                  bathroom_id
+                  building_id
+                  name
+                  building_name
+                  description
+                  floor
+                  male
+                  female
+                  all_gender
+                  handicap_accessible
+                  }
+                }`;
+      request("http://35.199.57.159", query)
+                .then((result) => {
+                  return result.getNearestBathrooms;
+                })
+                .catch(console.error); 
+    }
+
 export default class GoButton extends Component {
 
   state = {
     bathroom: null
   }
 
-  getNearestBathroom = () => {
-    const query = ` 
-                query {
-                    getNearestBathrooms(lat: 42, long: -71, count: 1) {
-                    bathroom_id
-                    building_id
-                    name
-                    building_name
-                    description
-                    floor
-                    male
-                    female
-                    all_gender
-                    handicap_accessible
-                    }
-                  }`;
-        request("http://35.199.57.159", query)
-                  .then((result) => {
-                    return result.getNearestBathrooms;
-                  })
-                  .catch(console.error); 
-      }
-
   goToNearestBathroom() {
-    const bathroom = this.getNearestBathroom();
+    const bathroom = getNearestBathroom();
     this.setState({
       bathroom
     });

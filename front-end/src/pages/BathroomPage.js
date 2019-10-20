@@ -122,15 +122,42 @@ const list = [
   }
 ];
 
+
+getNearestBathrooms = (lat, long, numBathrooms) => {
+  console.log("Fetching nearest bathrooms...");
+  const query = ` 
+            query {
+                getNearestBathrooms(lat: ${lat}, long: ${long}, count: ${numBathrooms}) {
+                bathroom_id
+                building_id
+                name
+                building_name
+                description
+                floor
+                male
+                female
+                all_gender
+                handicap_accessible
+                }
+              }`;
+    request("http://35.199.57.159", query)
+              .then((result) => {
+                console.log(result);
+                return result;
+              })
+              .catch(console.error); 
+  }
+
 export default class BathroomPage extends Component {
-    state = {
-        initialPosition: 'unknown',
-        lastPosition: 'unknown', 
-        nearestBathrooms: null   
+    state = { 
+        initialPosition: {latitude: 0, longitude: 0},
+        lastPosition: {latitude: 0, longitude: 0},
+        nearestBathrooms:[]
     }
 
     watchID = null;
     componentDidMount = () => {
+      console.log("Component did mount..."); 
         navigator.geolocation.getCurrentPosition(
             (position) => {
             const initialPosition = JSON.stringify(position);
@@ -141,53 +168,30 @@ export default class BathroomPage extends Component {
         );
         this.watchID = navigator.geolocation.watchPosition((position) => {
             const lastPosition = JSON.stringify(position);
-            this.setState({ lastPosition });
-        });
+            const nearestBathrooms = getNearestBathrooms(lastPosition.latitude, lastPosition.longitude, 20);
 
-        const nearestBathrooms = this.getNearestBathrooms(20);
-        this.setState({
-          nearestBathrooms
+            this.setState({ lastPosition, nearestBathrooms });
         });
     }
 
-    getGenderText(male, female, all_gender, handicap) {
+    getGenderText(male, female, all_gender) {
       if(all_gender == 1) {
         return "All Gender";
       } else if(female == 1) {
         return "Female";
-      } else {
+      } else { 
         return "Male";
-      }
+      } 
     } 
 
     componentWillUnmount = () => {
         navigator.geolocation.clearWatch(this.watchID);
     }
 
-    getNearestBathrooms = (numBathrooms) => {
-    const query = ` 
-                query {
-                    getNearestBathrooms(lat: ${this.state.lastPosition.x}, long: ${this.state.lastPosition.y}, count: ${numBathrooms}) {
-                    bathroom_id
-                    building_id
-                    name
-                    building_name
-                    description
-                    floor
-                    male
-                    female
-                    all_gender
-                    handicap_accessible
-                    }
-                  }`;
-        request("http://35.199.57.159", query)
-                  .then((result) => {
-                    return result;
-                  })
-                  .catch(console.error); 
-      }
 
   render() {
+    const nearestBathrooms = getNearestBathrooms(this.state.lastPosition.latitude, this.state.lastPosition.longitude, 20) == undefined ? [] : nearestBathrooms = getNearestBathrooms(this.state.lastPosition.latitude, this.state.lastPosition.longitude, 20);
+
     return (
       <View style={{ marginTop: 40, width: "100%", height: "100%" }}>
         <ScrollView
@@ -196,7 +200,7 @@ export default class BathroomPage extends Component {
           showsHorizontalScrollIndicator={true}
           showsVerticalScrollIndicator={false}
         >
-          {this.state.nearestBathrooms.map((elem, i) => {
+          {nearestBathrooms.map((elem, i) => {
             return (
               <View>
                 <BathroomPanel
@@ -204,9 +208,9 @@ export default class BathroomPage extends Component {
                   key={i}
                   bathroomName={elem.bathroom_name}
                   bathroomAddress={elem.building_name}
-                  genderText={getGenderText(elem.male, elem.female, elem.all_gender, elem.handicap)}
+                  genderText={getGenderText(elem.male, elem.female, elem.all_gender)}
                   handicapText={elem.handicap ? "Handicapped" : ""}
-                />
+                /> 
                 <View style={styles.line} />
               </View>
             );

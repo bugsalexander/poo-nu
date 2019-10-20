@@ -3,7 +3,9 @@ import { Picker, StyleSheet, Text, View, TextInput } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import CheckBox from "react-native-check-box";
 import { Button, Input } from "react-native-elements";
+import {request} from 'graphql-request';
 
+/*
 const list = [
   { buildingName: "West Village A", buildingID: 1 },
   { buildingName: "West Village B", buildingID: 2 },
@@ -14,19 +16,18 @@ const list = [
   { buildingName: "West Village G", buildingID: 7 },
   { buildingName: "West Village H", buildingID: 8 }
 ];
+*/
 
 function getBuildings() {
   const query = ` 
-             mutation {
-                getAllBuildings(count:999999)) {
-                  building_id,
-                  building_name,
-                  building_longitude,
-                  building_latitude
+             query {
+                getAllBuildings(count: 82) {
+                  building_name
                 }
               }`;
       request("http://35.199.57.159", query)
       .then((data) => {
+        console.log(data)
         return data;
       }).catch(console.error); 
 }
@@ -79,10 +80,11 @@ export default class AddBathroom extends Component {
       capacity: capacity
     });
 
-    addBathroom();
+    addBathroom(); 
   }
 
   addBathroom = () => {
+    console.log("Adding bathroom...");
     const query = ` 
                mutation {
                   addRating(building_id: ${this.state.building}, name:${this.state.name}, description:${this.state.description}, floor:${this.state.floor}, male:${this.state.male}, female:${this.state.female}, all_gender:${this.state.all_gender}, handicap_accessible: ${this.state.handicap}, capacity:${this.state.capacity}) {
@@ -92,6 +94,9 @@ export default class AddBathroom extends Component {
   }
 
   render() {
+
+    const list = getBuildings() == undefined ? [] : getBuildings();
+
     return (
       <View style={styles.base}>
         <View style={styles.input}>
@@ -106,16 +111,16 @@ export default class AddBathroom extends Component {
           <Text style={styles.textInput}>Building:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
-            items={this.state.buildings.map((elem, i) => {
+            items={list.map((elem, i) => {
               return {label: elem.building_name, value: elem.building_name };
             })}
           />
         </View>
         <View style={styles.input}>
-          <Text style={styles.textInput}>Floor:</Text>
+          <Text steyle={styles.textInput}>Floor:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
-            items={this.state.buildings.map((elem, i) => {
+            items={list.map((elem, i) => {
               return {label: elem.building_name, value: elem.building_name };
             })}
           />
@@ -124,7 +129,7 @@ export default class AddBathroom extends Component {
           <Text style={styles.textInput}>Gender:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
-            items={this.state.buildings.map((elem, i) => {
+            items={list.map((elem, i) => {
               return {label: elem.building_name, value: elem.building_name };
             })}
           />
