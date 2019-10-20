@@ -57,12 +57,11 @@ export default class BathroomPage extends Component {
     componentWillUnmount = () => {
         navigator.geolocation.clearWatch(this.watchID);
     }
-    ///             url:'10.253.81.28:4000',
 
     getNearestBathrooms = (numBathrooms) => {
     const query = ` 
                 query {
-                    getNearestBathrooms(lat: 42, long: -71, count: 10) {
+                    getNearestBathrooms(lat: 42, long: -71, count: 1) {
                     bathroom_id
                     building_id
                     name

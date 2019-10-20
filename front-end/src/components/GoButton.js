@@ -13,38 +13,37 @@ import axios from 'axios';
 
 export default class GoButton extends Component {
 
-  getNearestBathroom = () => {
-    axios({
-        url:'localhost://3000 or something',
-        method: 'get',
-        data: {
-            query: "{"
-                + "getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:${numBathrooms}) { "
-                +  "bathroom_id " 
-                +  "building_id "
-                +  "name "
-                +  "building_name "
-                +  "description "
-                +  "floor "
-                +  "male "
-                +  "female "
-                +  "all_gender "
-                +  "handicap_accessible"
-                + "}"
-                + "}"
-              }
-    }).then((result) => {
-        console.log(result.data);
-        return result.data;d
-    }).catch((err) => {
-      console.log(err);
-    });
+  state = {
+    bathroom: null
   }
 
+  getNearestBathroom = () => {
+    const query = ` 
+                query {
+                    getNearestBathrooms(lat: 42, long: -71, count: 1) {
+                    bathroom_id
+                    building_id
+                    name
+                    building_name
+                    description
+                    floor
+                    male
+                    female
+                    all_gender
+                    handicap_accessible
+                    }
+                  }`;
+        request("http://35.199.57.159", query)
+                  .then((result) => {
+                    return result.getNearestBathrooms;
+                  })
+                  .catch(console.error); 
+      }
+
   goToNearestBathroom() {
-    const query = this.getNearestBathroom();
+    const bathroom = this.getNearestBathroom();
     this.setState({
-      query
+      bathroom
     });
 
     // TODO: redo this thing with the proper information from the query

@@ -51,21 +51,20 @@ export default class BathroomScreen extends Component {
 // this.state.bathroomId
 // this.state.ratingContent
 
-  publishRatingQuery = () => {
-    axios({
-      url:'localhost://3000 or something',
-      method: 'post',
-      data: {
-        mutation: "mutation {" 
-          + "addRating(bathroomId: ${1}, ratingContent: ${}, ratingValue: ${this.state.userRating}) {  "
-        + "}"
-      +"}"
-      }
-    }).then((result) => {
-      console.log(result.data);
-      return result.data;
-    }); 
-  }
+
+
+  addBathroomRating = () => {
+  const query = ` 
+              mutation {
+                addRating(bathroomId: ${1}, ratingContent: ${}, ratingValue: ${this.state.userRating}) {
+                }
+              }`;
+      request("http://35.199.57.159", query)
+                .then((result) => {
+                  return result.data;
+                })
+                .catch(console.error); 
+    }
 
   render() {
     return (
