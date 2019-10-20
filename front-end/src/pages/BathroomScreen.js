@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Rating, AirbnbRating } from "react-native-elements";
-import RatingModal from "./RatingModal";
+import RatingModal from "../components/RatingModal";
 import { Actions } from "react-native-router-flux";
 
 export default class BathroomScreen extends Component {
@@ -68,10 +68,10 @@ export default class BathroomScreen extends Component {
           <TouchableOpacity>
             <Image
               style={{ width: 24, height: 24, marginTop: 2 }}
-              source={require("./assets/bookmark.png")}
+              source={require("../../assets/bookmark.png")} 
             />
           </TouchableOpacity>
-        </View>
+        </View> 
         <View style={styles.rating}>
           <View style={styles.rating}>
             <Rating imageSize={20} readonly startingValue={4.5} />
@@ -118,9 +118,9 @@ export default class BathroomScreen extends Component {
                 width: "20%"
               }}
             >
-              <Image
+              <Image 
                 style={styles.star}
-                source={require("./assets/toilet-paper.png")}
+                source={require("../../assets/toilet-paper.png")}
               />
               <Text>Flush</Text>
             </View>

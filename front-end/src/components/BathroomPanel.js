@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {Text, View, StyleSheet, Button, Card} from 'react-native';
-import BathroomScreen from '../../BathroomScreen';
+import BathroomScreen from '../pages/BathroomScreen';
 import { Actions } from 'react-native-router-flux';
 
 export default class BathroomPanel extends Component {
