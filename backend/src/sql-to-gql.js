@@ -20,7 +20,7 @@ export function reformatBathroom(sql_bathroom) {
     handicap_accessible: sql_bathroom.handicap_accessible,
     average_rating: sql_bathroom.average_rating,
     ratings: sql_bathroom.ratings
-  }
+  };
 }
 
 /**
@@ -33,15 +33,19 @@ export function reformatBathrooms(sql_bathrooms) {
 
 /**
  * Reformats sa list of sql formatted buildings.
- * @param {*} sql_building the list of buildings to reformat
+ * @param {*} sql_buildings the list of buildings to reformat
  */
-export function reformatBuildings(sql_building) {
-  return {
-    building_id: sql_building.building_id,
-    building_name: sql_building.name,
-    building_latitude: sql_building.building_latitude,
-    building_longitude: sql_building.building_longitude,
+export function reformatBuildings(sql_buildings) {
+  function reformatBuilding(single) {
+    return {
+      building_id: single.building_id,
+      building_name: single.name,
+      building_latitude: single.building_latitude,
+      building_longitude: single.building_longitude,
+    };
   }
+
+  return sql_buildings.map((single) => reformatBuilding(single));
 }
 
 /**
@@ -53,5 +57,5 @@ export function reformatBathroomRating(sql_rating) {
     bathroom_id: sql_rating.bathroom_id,
     rating_content: sql_rating.rating_content,
     rating_value: sql_rating.rating_value,
-  }
+  };
 }
