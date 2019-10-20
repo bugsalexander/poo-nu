@@ -144,7 +144,7 @@ CREATE TABLE In_Use (
 
 -- PROCEDURES --------------------------------------------------------
 -- ADD BATHROOM
-DROP PROCEDURE IF EXISTS add_bathroom
+DROP PROCEDURE IF EXISTS add_bathroom;
  
 DELIMITER //
  
@@ -186,7 +186,7 @@ end //
 DELIMITER ;
  
 -- ADD RATING
-DROP PROCEDURE IF EXISTS add_rating 
+DROP PROCEDURE IF EXISTS add_rating;
  
 DELIMITER // 
  
