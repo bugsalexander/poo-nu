@@ -32,4 +32,6 @@ Ideally, we will make Poo-NU into a published application and submit it to app s
 
 Tl, dr; we'd love to continue to pursue building this application to ensure that everyone has a pleasant experience. 
 
+If you'd like to deploy the backend for yourself, you can check it out [here](./backend).
+
 Built at HackHarvard 2019.
