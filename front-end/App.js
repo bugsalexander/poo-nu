@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import BathroomPage from './src/pages/BathroomPage';
 
 const list = [ 
@@ -31,18 +30,10 @@ import Routes from './Routes';
 
 function App() {
   return (
-    <Routes styles = {styles.container} />
+    <Routes />
   );
 } 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-}); 
 
 export default App
 AppRegistry.registerComponent('App', () => App)
