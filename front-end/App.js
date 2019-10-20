@@ -28,7 +28,7 @@ import RatingModal from "./RatingModal.js";
 export default function App() {
   return (
     <View style={styles.container}>
-      <BathroomPage bathrooms = {list}/>
+      {/* <BathroomPage bathrooms = {list}/> */}
       <BathroomScreen/>
     </View>
   );
@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
 });
