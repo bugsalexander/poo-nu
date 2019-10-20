@@ -30,7 +30,7 @@ export default class BathroomPage extends Component {
         return (
             <View style={{ marginTop: 40, width: '100%', height:'100%'}}>
             <ScrollView style={{flex: 0.8}} horizontal = {false} showsHorizontalScrollIndicator={true} showsVerticalScrollIndicator = {false}>
-                {list.map((elem, i) => {return <BathroomPanel navigation = {this.props.navigation} key = {i} bathroomName = {elem.bathroomName} bathroomAddress = {elem.bathroomAddress} />})}
+                {list.map((elem, i) => {return <BathroomPanel key = {i} bathroomName = {elem.bathroomName} bathroomAddress = {elem.bathroomAddress} />})}
             </ScrollView>
             <GoButton style ={styles.button}/>
             </View>

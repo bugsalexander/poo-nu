@@ -27,10 +27,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { AppRegistry} from 'react-native';
 import Routes from './Routes';
+import AddBathroom from './src/components/AddBathroom';
 
 function App() {
   return (
-    <Routes />
+    <AddBathroom />
   );
 } 
 
