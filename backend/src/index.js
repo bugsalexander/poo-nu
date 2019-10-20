@@ -10,7 +10,15 @@ import { readFileSync } from 'fs';
  
 // tries to connect to the database
 const login = JSON.parse(readFileSync("./database/mysql_login.txt"));
-const database = createConnection(login);
+let database = createConnection(login);
+database.connect((err) => {
+  if (err) {
+    console.log(err);
+    return undefined;
+  } else {
+    return database;
+  }
+});
 
 // runs the apollo server
 

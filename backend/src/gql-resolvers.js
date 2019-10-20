@@ -115,16 +115,13 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
  * @param {*} formatter a formatter function
  */
 function queryDatabase(database, query, formatter) {
-  return database.connect((err) => {
-    if (err) {
-      console.log(err);
-      return undefined;
-    } else {
-      return database.query(query, (err, result, fields) => {
-        if (err) throw err;
-        console.log(result);
-        return formatter(result);
-      });
-    }
-  });
+    return database.query(query, (err, result, fields) => {
+      if (err) throw err;
+      console.log(result);
+      console.log("----------------------------------------------------------------------------");
+      const formatted = formatter(result);
+      console.log(formatted);
+      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      return formatter(result);
+    });
 }
