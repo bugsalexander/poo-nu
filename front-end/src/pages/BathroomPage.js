@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {SafeAreaView, ActivityIndicator, Text, Button, View, StyleSheet, ScrollView, SectionList } from 'react-native';
 import BathroomPanel from '../components/BathroomPanel';
 import GoButton from '../components/GoButton';
-
+import axios from 'axios';
 const list = [ 
     {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
     {bathroomName:'West Village H: Floor 1', bathroomAddress: '291 St. Botolph St.'},
@@ -59,22 +59,27 @@ export default class BathroomPage extends Component {
     }
     
     getNearestBathrooms = (numBathrooms) => {
-        return `
-          query {
-            getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:${numBathrooms}) {
-                bathroom_id
-                building_id
-                name
-                building_name
-                description
-                floor
-                male
-                female
-                all_gender
-                handicap_accessible
-            }
-          }
-        `
+        axios({
+            url:'localhost://3000 or something',
+            method: 'get',
+            data: {
+                query: "query {"
+                    + "getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:${numBathrooms}) {"
+                    +  "bathroom_id"
+                    +  "building_id"
+                    +  "name"
+                    +  "building_name"
+                    +  "description"
+                    +  "floor"
+                    +  "male"
+                    +  "female"
+                    +  "all_gender"
+                    +  "handicap_accessible"
+                  }
+        }).then((result) => {
+            console.log(result.data);
+            return result.data;
+        });
       }
 
     render() {
