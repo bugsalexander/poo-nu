@@ -12,7 +12,7 @@ import { Button } from 'react-native-elements';
 
 export default class GoButton extends Component {
 
-  getNearestBathroom = () => {
+/*  getNearestBathroom = () => {
     return `
       query {
         getNearestBathrooms(lat: ${this.state.lat}, long: ${this.state.long}, count:1) {
@@ -29,7 +29,7 @@ export default class GoButton extends Component {
         }
       }
     `
-  }
+  }*/
 
   goToNearestBathroom() {
     const query = this.getNearestBathrooms(20);
@@ -49,9 +49,6 @@ export default class GoButton extends Component {
               title="I gotta go."
               onPress={() => this.goToNearestBathroom()}
             />
-            <Text style = {styles.boldText}>
-               Initial position: {this.state.initialPosition} Current: {this.state.lastPosition}
-            </Text>
             
           </View>
         </SafeAreaView> 
