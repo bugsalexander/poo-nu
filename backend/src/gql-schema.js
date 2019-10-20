@@ -14,8 +14,7 @@ const request = gql`
   type Query {
     getNearestBathrooms(lat: Float!, long: Float!, count: Int!): [Bathroom!]!
     getNearestBuildings(lat: Float!, long: Float!, count: Int!): [Building!]!
-    getRatings(bathroomId: Int!): [BathroomRating!]!
-    getAverageRating(bathroomId: Int!): Float!
+    getBathroom(bathroomId: Int!): Bathroom!
   }
 `;
 
@@ -35,27 +34,30 @@ const mutation = gql`
  * @param bathroom_id a unique id
  * @param building_id the id of the building this bathroom is in
  * @param name the name 
+ * @param building_name the name of the building
  * @param description the description 
  * @param floor the floor number this bathroom is on
  * @param male is this a male bathroom?
  * @param female is this a female bathroom?
  * @param all_gender is this bathroom allgender?
  * @param handicap_accessible is this bathroom handicap accessible?
+ * @param average_rating is nullable, as we could sometimes have no ratings.
+ * @param ratings the ratings of this bathroom. non-nullable, but may have the empty list.
  */
 const bathroom_t = gql`
   type Bathroom {
-    """
-    A bathroom.
-    """
     bathroom_id: Int!
     building_id: Int!
     name: String!
+    building_name: String!
     description: String!
     floor: Int!
     male: Boolean!
     female: Boolean!
     all_gender: Boolean!
     handicap_accessible: Boolean!
+    average_rating: Float
+    ratings: [BathroomRating!]!
   }
 `;
 
@@ -79,9 +81,6 @@ const bathroom_rating_t = gql`
  */
 const building_t = gql`
   type Building {
-    """
-    A building.
-    """
     building_id: Int!
     building_name: String!
     building_longitude: Float!
