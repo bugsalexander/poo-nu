@@ -9,7 +9,9 @@
     "pm2": "^4.1.2"
   },
   "scripts": {
-    "server": "babel-node ./src/index.js"
+    "server": "npx babel src --out-dir build && npx pm2 start build/index.js",
+    "status": "npx pm2 status",
+    "stop": "npx pm2 kill"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
