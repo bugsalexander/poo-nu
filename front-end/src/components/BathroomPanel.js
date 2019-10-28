@@ -46,7 +46,7 @@ export default class BathroomPanel extends Component {
           });
         }}
       >
-        <View style={{ alignItems: "left", width: "100%", paddingLeft: 16 }}>
+        <View style={{ width: "100%", paddingLeft: 16 }}>
           <Text style={styles.titleText}> {this.props.bathroomName}</Text>
           <Rating
             style={styles.rating}
