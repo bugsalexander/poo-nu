@@ -11,3 +11,6 @@ frontend/node_modules/**/*
 
 # the mysql credentials
 backend/database/mysql_login.txt
+
+# the build files
+backend/build/**/*

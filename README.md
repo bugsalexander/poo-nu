@@ -14,6 +14,8 @@ Initially, we did lots of planning. We thought about who would be using our app,
 
 Step two was splitting up the work, and figuring out what frameworks and APIs we were going to use in our project. We divided with Alex and Dillon on the backend, and Stanley and Jake on the frontend. Alex had recently heard about the greatness of GraphQL through a friend and wanted to try it out for the API, so we went with that for the backend, in parallel with Apollo server. Dillon had just taken a class on SQL, and decided to take it for a spin with the database. Stanley decided he wanted to try his hand at React-Native, and so he and Jake decided to use that for the frontend.
 
+<img src="./images/bathroompage.jpeg" alt="A bathroom page"/>
+
 ## Challenges we ran into
 Dillon and Alex had a lot of bug fixes relating to discrepancies between the GraphQL schema and the MySQL database work, while Jake and Stanley spent a significant amount of time trying to figure out how to route the application's front-end to different pages and develop a good flow for the assignment. When fusing our React-Native frontend and Node / GraphQL backend, we encountered a variety of issues regarding the format of the GraphQL data as well as with asynchronous functions and promises that proved to be more nuanced and complex than initially thought. 
 
@@ -29,3 +31,7 @@ Ideally, we will make Poo-NU into a published application and submit it to app s
  We considered providing the opportunity to add images, but felt that this could be too much of a privacy concern for others in the restroom; however, the visual appeal of the bathroom is certainly a factor, and alternative approaches such as similar stock photos should be pursued in the future. We could also evaluate reviews of these restrooms to pick buzzwords and characteristics associated with certain types of restrooms, recommending restrooms to users based on the frequency and recency of their reviews as well as their tendency towards a certain type of restroom (after all, cleanliness isn't the only priority when considering such accommodations). 
 
 Tl, dr; we'd love to continue to pursue building this application to ensure that everyone has a pleasant experience. 
+
+If you'd like to deploy the backend for yourself, you can check it out [here](./backend).
+
+Built at HackHarvard 2019.
