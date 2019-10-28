@@ -18,7 +18,7 @@ const list = [
 ];
 */
 
-getBuildings = async (query, data)  => {
+getBuildings = async ()  => {
   const query = ` 
              query {
                 getAllBuildings(count: 82) {
@@ -89,7 +89,7 @@ export default class AddBathroom extends Component {
 
   addBathroom = async (query, variables) => {
     console.log("Adding bathroom...");
-    const url = '';
+    const url = '35.245.94.121';
 
       try {
         const response = await axios.post(url, {
