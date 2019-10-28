@@ -31,4 +31,4 @@ To launch the Apollo server, then navigate to the backend directory, and run `ya
 
 To see the status of the server, run `npm run status`, and to stop it, run `npm run stop`.
 
-By default, the Apollo server listens on port 4000.
+By default, the Apollo server listens on port 4000. To configure it to the default port, 80, use the following command: `sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000`. After running, you should be able to visit the public IP address of your machine, and the GraphQL playground should appear.
