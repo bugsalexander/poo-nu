@@ -31,33 +31,6 @@ export default class BathroomPage extends Component {
                     handicap_accessible
                     }
                   }`;
-      const query2 = ` 
-                  query getNearestBathrooms($lat: Int!, $long: Int!, $numBathrooms: Int!) {
-                      getNearestBathrooms(lat: $lat, long: $long, count: $numBathrooms) {
-                      bathroom_id
-                      building_id
-                      name
-                      building_name
-                      description
-                      floor
-                      male
-                      female
-                      all_gender
-                      handicap_accessible
-                      }
-                    }`;
-          
-
-
-        variables = {
-          lat: lat,
-          long: long,
-          numBathrooms: numBathrooms
-        }
-
-        headers = {
-          'Content-Type': 'application/json'
-        }
 
         try {
           const response = await axios.post("http://35.245.94.121/", {
@@ -65,9 +38,6 @@ export default class BathroomPage extends Component {
             variables: {}
           });
           
-          console.log(response.data.data.getNearestBathrooms);
-
-          console.log("peepee");
           this.setState(() => ({
             isLoaded: true,
             nearestBathrooms: response.data.data.getNearestBathrooms
@@ -80,7 +50,7 @@ export default class BathroomPage extends Component {
     watchID = null;
     componentDidMount = () => {
       console.log("Component did mount..."); 
-        /*
+        
         navigator.geolocation.getCurrentPosition(
             (position) => {
             const initialPosition = JSON.stringify(position);
@@ -94,7 +64,7 @@ export default class BathroomPage extends Component {
             this.getNearestBathrooms(lastPosition.latitude, lastPosition.longitude, 20);
             this.setState({ lastPosition, nearestBathrooms });
         });
-        */
+        
 
       this.getNearestBathrooms(1, 1, 20);
     }
