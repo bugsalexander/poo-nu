@@ -18,7 +18,7 @@ const list = [
 ];
 */
 
-function getBuildings() {
+getBuildings = async (query, data)  => {
   const query = ` 
              query {
                 getAllBuildings(count: 82) {
@@ -33,9 +33,7 @@ function getBuildings() {
 }
 
 export default class AddBathroom extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       name: null,
       description: null,
       building: null,
@@ -46,9 +44,7 @@ export default class AddBathroom extends Component {
       handicap: null,
       capacity: null,
       buildings: getBuildings()
-    };
-    this.submit = this.submit.bind(this);
-  }
+  };
 
   submit(name, description, building, floor, gender, handicap, capacity) {
     if (gender == "All Gender") {
@@ -80,22 +76,37 @@ export default class AddBathroom extends Component {
       capacity: capacity
     });
 
-    addBathroom(); 
+    const query = ` 
+    mutation {
+       addBathroom(building_id: ${building}, name:${name}, description:${description}, floor:${floor}, male:${male}, female:${female}, all_gender:${all_gender}, handicap_accessible: ${handicap}, capacity:${capacity}) {
+       }
+     }`;
+
+    const variables = {}
+
+    this.addBathroom(query, variables); 
   }
 
-  addBathroom = () => {
+  addBathroom = async (query, variables) => {
     console.log("Adding bathroom...");
-    const query = ` 
-               mutation {
-                  addRating(building_id: ${this.state.building}, name:${this.state.name}, description:${this.state.description}, floor:${this.state.floor}, male:${this.state.male}, female:${this.state.female}, all_gender:${this.state.all_gender}, handicap_accessible: ${this.state.handicap}, capacity:${this.state.capacity}) {
-                  }
-                }`;
-        request("http://35.199.57.159", query).catch(console.error); 
+    const url = '';
+
+      try {
+        const response = await axios.post(url, {
+          query, 
+          variables
+        });
+
+        console.log(response.data);
+
+      } catch (err) {
+        console.log(error);
+      }
   }
 
   render() {
-
-    const list = getBuildings() == undefined ? [] : getBuildings();
+    // TODO: request building names and fill all of them in here
+    const list = ['Richards Hall', 'Ell Hall', 'Curry Student Center', 'Curry Library', 'Dillon Village C', 'St. Stanley St'];
 
     return (
       <View style={styles.base}>
