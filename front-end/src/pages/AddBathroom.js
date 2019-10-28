@@ -7,9 +7,9 @@ import {request} from 'graphql-request';
 
 /*
 const list = [
-  { buildingName: "West Village A", buildingID: 1 },
-  { buildingName: "West Village B", buildingID: 2 },
-  { buildingName: "West Village C", buildingID: 3 },
+  { buildingName: "Churchill Hall", buildingID: 1 },
+  { buildingName: "West Village A", buildingID: 2 },
+  { buildingName: "West Village B", buildingID: 3 },
   { buildingName: "West Village D", buildingID: 4 },
   { buildingName: "West Village E", buildingID: 5 },
   { buildingName: "West Village F", buildingID: 6 },
@@ -31,6 +31,7 @@ function getBuildings() {
         return data;
       }).catch(console.error); 
 }
+
 
 export default class AddBathroom extends Component {
   constructor(props) {
