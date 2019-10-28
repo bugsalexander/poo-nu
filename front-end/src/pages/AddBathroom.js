@@ -5,18 +5,18 @@ import CheckBox from "react-native-check-box";
 import { Button, Input } from "react-native-elements";
 import {request} from 'graphql-request';
 
-/*
-const list = [
-  { buildingName: "West Village A", buildingID: 1 },
-  { buildingName: "West Village B", buildingID: 2 },
-  { buildingName: "West Village C", buildingID: 3 },
-  { buildingName: "West Village D", buildingID: 4 },
-  { buildingName: "West Village E", buildingID: 5 },
-  { buildingName: "West Village F", buildingID: 6 },
-  { buildingName: "West Village G", buildingID: 7 },
-  { buildingName: "West Village H", buildingID: 8 }
-];
-*/
+
+// const list = [
+//   { buildingName: "Churchill Hall", buildingID: 1 },
+//   { buildingName: "West Village A", buildingID: 2 },
+//   { buildingName: "West Village B", buildingID: 3 },
+//   { buildingName: "West Village D", buildingID: 4 },
+//   { buildingName: "West Village E", buildingID: 5 },
+//   { buildingName: "West Village F", buildingID: 6 },
+//   { buildingName: "West Village G", buildingID: 7 },
+//   { buildingName: "West Village H", buildingID: 8 }
+// ];
+
 
 getBuildings = async ()  => {
   const query = ` 
@@ -31,6 +31,7 @@ getBuildings = async ()  => {
         return data;
       }).catch(console.error); 
 }
+
 
 export default class AddBathroom extends Component {
   state = {
@@ -128,7 +129,7 @@ export default class AddBathroom extends Component {
           />
         </View>
         <View style={styles.input}>
-          <Text steyle={styles.textInput}>Floor:</Text>
+          <Text style={styles.textInput}>Floor:</Text>
           <RNPickerSelect
             onValueChange={value => console.log(value)}
             items={list.map((elem, i) => {

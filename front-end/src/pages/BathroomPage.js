@@ -51,19 +51,20 @@ export default class BathroomPage extends Component {
     componentDidMount = () => {
       console.log("Component did mount..."); 
         
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-            const initialPosition = JSON.stringify(position);
-            this.setState({ initialPosition });
-            },
-            (error) => alert(error.message),
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-        );
-        this.watchID = navigator.geolocation.watchPosition((position) => {
-            const lastPosition = JSON.stringify(position);
-            this.getNearestBathrooms(lastPosition.latitude, lastPosition.longitude, 20);
-            this.setState({ lastPosition, nearestBathrooms });
-        });
+        // navigator.geolocation.getCurrentPosition(
+        //     (position) => {
+        //     const initialPosition = JSON.stringify(position);
+        //     this.setState({ initialPosition });
+        //     },
+        //     (error) => alert(error.message),
+        //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        // );
+        
+        // this.watchID = navigator.geolocation.watchPosition((position) => {
+        //     const lastPosition = JSON.stringify(position);
+        //     this.getNearestBathrooms(lastPosition.latitude, lastPosition.longitude, 20);
+        //     this.setState({ lastPosition, nearestBathrooms });
+        // });
         
 
       this.getNearestBathrooms(1, 1, 20);
@@ -93,7 +94,7 @@ export default class BathroomPage extends Component {
     return (
       <View style={{ marginTop: 40, width: "100%", height: "100%" }}>
         <ScrollView
-          style={{ flex: 0.8 }}
+          style={styles.scroll}
           horizontal={false}
           showsHorizontalScrollIndicator={true}
           showsVerticalScrollIndicator={false}
@@ -123,7 +124,7 @@ export default class BathroomPage extends Component {
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
     padding: 30, 
     margin: 2,
@@ -131,8 +132,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#d2f7f1"
   },
+  scroll: {
+    flex: 9
+  },
   button: {
-    flex: 0.2,
+    flex: 1,
     marginBottom: 0
   },
   line: {
