@@ -165,17 +165,17 @@ export default class BathroomPage extends Component {
 
 
   render() {
-    const nearestBathrooms = getNearestBathrooms(this.state.lastPosition.latitude, this.state.lastPosition.longitude, 20) == undefined ? [] : nearestBathrooms = getNearestBathrooms(this.state.lastPosition.latitude, this.state.lastPosition.longitude, 20);
+    // const nearestBathrooms = getNearestBathrooms(this.state.lastPosition.latitude, this.state.lastPosition.longitude, 20) == undefined ? [] : nearestBathrooms = getNearestBathrooms(this.state.lastPosition.latitude, this.state.lastPosition.longitude, 20);
 
     return (
       <View style={{ marginTop: 40, width: "100%", height: "100%" }}>
         <ScrollView
-          style={{ flex: 0.8 }}
+          style={styles.scroll}
           horizontal={false}
           showsHorizontalScrollIndicator={true}
           showsVerticalScrollIndicator={false}
         >
-          {nearestBathrooms.map((elem, i) => {
+          {list.map((elem, i) => {
             return (
               <View>
                 <BathroomPanel
@@ -212,8 +212,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#d2f7f1"
   },
+  scroll: {
+    flex: 9
+  },
   button: {
-    flex: 0.2,
+    flex: 1,
     marginBottom: 0
   },
   line: {
