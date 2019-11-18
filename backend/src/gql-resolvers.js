@@ -7,7 +7,7 @@ import { reformatBathroom, reformatBathrooms, reformatBuildings, reformatBathroo
  
 /**
  * Produces the resolver object for GraphQL
- * @param {Connection} database takes in the database, produces the resolver.
+ * @param {Session} database takes in the database, produces the resolver.
  */
 export function gql_resolver(database) {
   return {
@@ -130,22 +130,18 @@ function addRating(database, bathroom_id, rating_content, rating_value) {
 
 /**
  * Queries the database for a certain query.
- * @param {Connection} database the database
+ * @param {Session} client the database
  * @param {string} query the query
  * @param {*} formatter a formatter function
  */
-function queryDatabase(database, query, formatter) {
+function queryDatabase(client, query, formatter) {
+
   return new Promise((resolve, reject) => {
-    database.query(query, (err, result, fields) => {
-      if (err) {
-        reject(err);
-      }
-      console.log(result);
-      console.log("----------------------------------------------------------------------------");
-      const formatted = formatter(result);
-      console.log(formatted);
-      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-      resolve(formatter(result));
+    client.then((session) => {
+      session.sql(query).execute((result) => {
+        console.log(result);
+        resolve(formatter(result));
+      });
     });
   });
 }
