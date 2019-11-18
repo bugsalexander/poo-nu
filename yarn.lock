@@ -690,6 +690,14 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@mysql/xdevapi@^8.0.18":
+  version "8.0.18"
+  resolved "https://registry.yarnpkg.com/@mysql/xdevapi/-/xdevapi-8.0.18.tgz#ffa50a568482b2ba89dd0f94c9b072bb34da6b42"
+  integrity sha512-V0Vw02KWdfdwWnjhvzyxoTqrZefJv4h31yhMjcpG61uhNDVINC4SafTR3s1PcO79QlrQlzGmJ/jZZ2zLPFYjHA==
+  dependencies:
+    google-protobuf "3.4.0"
+    parsimmon "1.6.2"
+
 "@opencensus/core@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@opencensus/core/-/core-0.0.8.tgz#df01f200c2d2fbfe14dae129a1a86fb87286db92"
@@ -2283,6 +2291,11 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
+google-protobuf@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.4.0.tgz#58fbe51555a0a56b2dd3fc6f6d869fa21d57ab0a"
+  integrity sha512-8gq3CyAZFyHJ5dZ0Du/OztbwxEHhHTNOtfr1cSUQYuW6lsrKjMU2DETvOlxPpYNKZ7zAW4xEE7UWqrTxH7bG6Q==
+
 graceful-fs@^4.1.11:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.2.tgz#6f0952605d0140c1cfdb138ed005775b92d67b02"
@@ -3323,6 +3336,11 @@ parseurl@^1.3.2, parseurl@~1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
+
+parsimmon@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/parsimmon/-/parsimmon-1.6.2.tgz#28fbe6b8caa38ab89f52b77f8c7743563c7d9aff"
+  integrity sha512-bJNB0ZQhHyM5KqO2Z5ttQAVn/PZ2pccxaOnMcZ0Su7HA1Iv4GQTfUmzSZ6N3jcsCn9F68PZcypAvF3nDRRL+3g==
 
 pascalcase@^0.1.1:
   version "0.1.1"

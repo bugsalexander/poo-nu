@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "dependencies": {
+    "@mysql/xdevapi": "^8.0.18",
     "apollo-server": "^2.9.6",
     "cross-env": "5.0.5",
     "graphql": "^14.5.8",
@@ -9,7 +10,8 @@
     "pm2": "^4.1.2"
   },
   "scripts": {
-    "server": "npx babel src --out-dir build && npx pm2 start build/index.js",
+    "build": "npx babel src --out-dir build",
+    "start": "yarn build && npx pm2 start build/index.js",
     "status": "npx pm2 status",
     "stop": "npx pm2 kill"
   },
