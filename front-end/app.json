@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "poo-nu-app",
+    "slug": "poo-nu",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nu.poo"
+    },
+    "android": {
+      "package": "com.brh.hestia",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "description": "Ever need to hit the loo, and don't know what to do? Well not anymore! With POO-NU, you'll never be more ... than a click away."
+  }
+}
